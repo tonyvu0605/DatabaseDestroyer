@@ -1,0 +1,20 @@
+# Stage 1: Build image
+FROM node:lts-bookworm AS build
+RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
+WORKDIR /usr/src/api
+COPY package.json yarn.lock ./
+# If you are using npm private modules or need to use a .npmrc file at build time:
+# RUN --mount=type=secret,mode=0644,id=npmrc,target=/usr/src/app/.npmrc yarn install --frozen-lockfile --production
+RUN yarn install --frozen-lockfile --production
+
+
+# Stage 2: Production image
+FROM node:lts-bookworm-slim
+ENV NODE_ENV production
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
+USER node
+WORKDIR /usr/src/api
+COPY --chown=node:node --from=build /usr/src/api/node_modules ./node_modules
+COPY --chown=node:node . /usr/src/api
+CMD ["dumb-init", "node", "index.js"]
+

@@ -1,0 +1,61 @@
+/* scrollbar */
+@import '/node_modules/simplebar-react/dist/simplebar.min.css';
+
+// Define Breakpoint Mixins
+$breakpoints: (
+  xs: 0,
+  // extra-small devices (portrait phones)
+  sm: 600px,
+  // small devices (landscape phones)
+  md: 960px,
+  // medium devices (tablets)
+  lg: 1280px,
+  // large devices (desktops)
+  xl: 1920px,
+  // extra-large devices (large desktops)
+);
+
+@mixin mediaUp($key) {
+  @if map-has-key($breakpoints, $key) {
+    @media (min-width: #{map-get($breakpoints, $key)}) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint `#{$key}`.";
+  }
+}
+
+@mixin mediaDown($key) {
+  @if map-has-key($breakpoints, $key) {
+    @media (max-width: #{map-get($breakpoints, $key) - 1}) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint `#{$key}`.";
+  }
+}
+
+@mixin mediaBetween($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    @media (min-width: #{map-get($breakpoints, $lower)}) and (max-width: #{map-get($breakpoints, $upper)}) {
+      @content;
+    }
+  } @else {
+    @warn "One or more unknown breakpoints `#{$lower}`, `#{$upper}`.";
+  }
+}
+
+@mixin mediaOnly($key) {
+  @if $key == last(map-keys($breakpoints)) {
+    @include mediaUp($key);
+  } @else {
+    $next: next(map-keys($breakpoints), $key);
+    @if $next {
+      @media (min-width: #{map-get($breakpoints, $key)}) and (max-width: #{map-get($breakpoints, $next) - 1}) {
+        @content;
+      }
+    } @else {
+      @warn "Unknown or last breakpoint `#{$key}` has no upper bound.";
+    }
+  }
+}

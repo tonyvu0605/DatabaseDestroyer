@@ -1,0 +1,10 @@
+build/*
+dist/*
+public/*
+**/.next/*
+**/node_modules/*
+**/coverage/*
+**/.idea/*
+
+package-lock.json
+yarn.lock

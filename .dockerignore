@@ -1,0 +1,33 @@
+# Node modules
+node_modules
+/node_modules
+node_modules/
+node_modules/**/*
+
+# Environment secrets
+.env
+
+# Logs
+*.log
+logs
+
+# Build directory
+dist
+build
+
+# Editor directories and files
+/.vscode
+.idea
+
+# Docker
+Dockerfile
+docker-compose*
+compose*
+.dockerignore
+
+# Git
+.git
+.gitignore
+
+# Other
+.prettierignore

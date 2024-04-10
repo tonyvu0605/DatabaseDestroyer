@@ -1,0 +1,28 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8080:8080
+    env_file:
+      - ./secrets/API.env
+    volumes:
+      - ./api:/usr/src/api
+      - /usr/src/api/node_modules
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3030:3030
+    volumes:
+      - ./client:/usr/src/client
+      - /usr/src/client/node_modules
+    env_file:
+      - ./secrets/Client.env
+
+
+
+
+
