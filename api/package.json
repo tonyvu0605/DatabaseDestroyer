@@ -64,13 +64,22 @@
     "eslint-plugin-security": "^2.1.1",
     "eslint-plugin-security-node": "^1.1.4",
     "eslint-plugin-sql": "^2.5.0",
+    "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "nodemon": "^3.0.1",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "src/**/*.{js,ts}": [
+      "eslint --fix"
+    ],
+    "src/**/*.{js,ts,json,css,scss,md}": [
       "prettier --write"
     ]
   }
