@@ -6,22 +6,13 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import playerRoutes from './routes/player.js';
-import logger from './utils/logger.js';
-
-
+import playerRoutes from './src/routes/playerRoutes.js';
+import logger from './src/utils/logger.js';
 
 dotenv.config();
 
 const app = express();
-const userSockets = {};
 const httpServer = http.createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: process.env.CLIENT_SOURCE,
-    methods: ['GET', 'POST'],
-  },
-});
 
 //middlewares
 app.use((req, res, next) => {
@@ -30,17 +21,15 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(
-    cors({
-      origin: process.env.CLIENT_SOURCE,
-    })
+  cors({
+    origin: process.env.CLIENT_SOURCE,
+  })
 );
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan('common'));
 
 app.use('/api/player', playerRoutes);
-
-
 
 const PORT = process.env.PORT || 8080; // use an environment variable for the port
 
