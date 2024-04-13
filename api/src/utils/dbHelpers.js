@@ -1,46 +1,46 @@
 import { getDbClient } from '../configs/dbConfigs.js';
 
-export const executeQuery = async (sql, values, client = null) => {
-  const isExternalClient = !!client;
+export const executeQuery = async (sql, values, connection = null) => {
+  const isExternalClient = !!connection;
   const db = await getDbClient();
 
   if (!isExternalClient) {
-    client = await db.connect();
+    connection = await db.getConnection();
   }
   try {
     const sanitizedValues = values.map((value) => (value === undefined ? null : value));
-    const res = await client.query(sql, sanitizedValues);
+    const res = await connection.query(sql, sanitizedValues);
     return res.rows;
   } finally {
     if (!isExternalClient) {
-      client.release();
+      connection.release();
     }
   }
 };
 export const startTransaction = async () => {
   const db = await getDbClient();
-  const client = await db.connect();
+  const connection = await db.connect();
   try {
-    await client.query('BEGIN');
-    return client; // Return client to use it for further transaction queries
+    await connection.beginTransaction();
+    return connection; // Return client to use it for further transaction queries
   } catch (err) {
-    client.release();
+    connection.release();
     throw err; // Re-throw and let the caller handle it
   }
 };
 
-export const commitTransaction = async (client) => {
+export const commitTransaction = async (connection) => {
   try {
-    await client.query('COMMIT');
+    await connection.commit();
   } finally {
-    client.release();
+    connection.release();
   }
 };
 
-export const rollbackTransaction = async (client) => {
+export const rollbackTransaction = async (connection) => {
   try {
-    await client.query('ROLLBACK');
+    await connection.rollback();
   } finally {
-    client.release();
+    connection.release();
   }
 };
