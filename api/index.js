@@ -12,41 +12,22 @@ import logger from './src/utils/logger.js';
 dotenv.config();
 
 const app = express();
-const httpServer = http.createServer(app);
 
-//middlewares
+// Middlewares
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 app.use(express.json());
-app.use(
-  cors({
-    origin: process.env.CLIENT_SOURCE,
-  })
-);
+app.use(cors({ origin: process.env.CLIENT_SOURCE }));
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan('common'));
 
+// Routes
 app.use('/api/player', playerRoutes);
 
-const PORT = process.env.PORT || 8080; // use an environment variable for the port
-
-httpServer.listen(PORT, () => {
-  logger.info('Backend server is running on ' + PORT);
-
-  logger.info('Startup completed');
-});
-
-async function closeGracefully(signal) {
-  logger.info(`*^!@4=> Received signal to terminate: ${signal}`);
-
-  process.kill(process.pid, signal);
-}
-
-process.once('SIGINT', closeGracefully);
-process.once('SIGTERM', closeGracefully);
+// Error handling
 process.on('uncaughtException', (error) => {
   logger.error({ err: error }, 'Uncaught Exception thrown');
 });
@@ -54,3 +35,21 @@ process.on('uncaughtException', (error) => {
 process.on('unhandledRejection', (error) => {
   logger.error({ err: error }, 'Unhandled Rejection');
 });
+
+// Server setup
+const PORT = process.env.PORT || 8080;
+const httpServer = http.createServer(app);
+
+httpServer.listen(PORT, () => {
+  logger.info(`Backend server is running on port ${PORT}`);
+  logger.info('Startup completed');
+});
+
+// Graceful shutdown
+async function closeGracefully(signal) {
+  logger.info(`Received signal to terminate: ${signal}`);
+  process.kill(process.pid, signal);
+}
+
+process.once('SIGINT', closeGracefully);
+process.once('SIGTERM', closeGracefully);
