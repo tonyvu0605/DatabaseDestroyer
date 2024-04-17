@@ -30,7 +30,7 @@ async function initializeConfig() {
 
   // Simple connectivity check to ensure our Pool is configured correctly
   try {
-    const connection = await pool.getConnections();
+    const connection = await pool.getConnection();
 
     logger.info('Database connection established');
     connection.release(); // Return the client to the pool

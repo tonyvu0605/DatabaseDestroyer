@@ -9,17 +9,18 @@ export const executeQuery = async (sql, values, connection = null) => {
   }
   try {
     const sanitizedValues = values.map((value) => (value === undefined ? null : value));
-    const res = await connection.query(sql, sanitizedValues);
-    return res.rows;
+    const [rows] = await connection.query(sql, sanitizedValues);
+    return rows;
   } finally {
     if (!isExternalClient) {
       connection.release();
     }
   }
 };
+
 export const startTransaction = async () => {
   const db = await getDbClient();
-  const connection = await db.connect();
+  const connection = await db.getConnection();
   try {
     await connection.beginTransaction();
     return connection; // Return client to use it for further transaction queries
