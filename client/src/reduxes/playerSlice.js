@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Async thunks
 export const fetchPlayerById = createAsyncThunk(
-  'notifications/fetchNotifications',
+  'players/fetchPlayerById',
   async (_, { rejectWithValue }) => {
     try {
       const response = await makeRequest.get('/player/player_id');
@@ -11,7 +11,19 @@ export const fetchPlayerById = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  }
+  },
+);
+
+export const fetch10Players = createAsyncThunk(
+  'players/fetch10Players',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await makeRequest.get('/player/random');
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response ? err.response.data : 'An error occurred');
+    }
+  },
 );
 
 const initialState = {
@@ -34,6 +46,17 @@ const playerSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchPlayerById.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetch10Players.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetch10Players.fulfilled, (state, action) => {
+        state.playerData = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetch10Players.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       });

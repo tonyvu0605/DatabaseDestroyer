@@ -22,7 +22,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   darkMode: darkModeReducer,
-  player: playerReducer(),
+  player: playerReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
