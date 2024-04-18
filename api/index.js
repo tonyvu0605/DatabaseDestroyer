@@ -1,5 +1,6 @@
 import 'module-alias';
 import cors from 'cors';
+import compression from 'compression';
 import http from 'http';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -20,6 +21,12 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(cors({ origin: process.env.CLIENT_SOURCE }));
+app.use(
+  compression({
+    level: 6,
+    threshold: 100 * 1024,
+  })
+);
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan('common'));

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import Iconify from 'components/iconify';
 import { useNavigate } from 'react-router-dom';
+import { logoutUser } from 'reduxes/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDarkMode } from 'reduxes/darkModeSlice';
 
 import {
   Box,
@@ -16,10 +20,6 @@ import {
 } from '@mui/material';
 
 import './navBar.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from 'reduxes/darkModeSlice';
-import { logoutUser } from 'reduxes/authSlice';
-import Iconify from 'components/iconify';
 
 // ----------------------------------------------------------------------
 
