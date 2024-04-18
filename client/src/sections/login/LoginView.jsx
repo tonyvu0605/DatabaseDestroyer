@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { loginUser } from 'reduxes/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { CustomAlert } from 'components/customMUIComponents';
 
 import Box from '@mui/material/Box';
-import { Link, Alert, Button, Divider, Container, TextField, Typography } from '@mui/material';
+import { Link, Button, Divider, Container, TextField, Typography } from '@mui/material';
 
 import './loginView.scss';
 
@@ -28,6 +29,8 @@ const LoginView = () => {
       navigate('/');
     }
   };
+
+  console.log(error);
 
   return (
     <div className="login-view">
@@ -68,7 +71,7 @@ const LoginView = () => {
             Don&apos;t have an account?
           </Link>
 
-          {error && <Alert error={error} />}
+          <CustomAlert sx={{ padding: 1 }} error={error} severity="error" />
         </Box>
       </Container>
     </div>

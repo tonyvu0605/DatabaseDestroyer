@@ -6,8 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 
 import palette  from './palette';
-import { typography } from './typography';
 import overrides from './overrides';
+import { typography } from './typography';
 
 // ----------------------------------------------------------------------
 
