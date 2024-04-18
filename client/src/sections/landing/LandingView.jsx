@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { fetch10Players } from 'reduxes/playerSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Table,
+  Paper,
+  TableRow,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
-  TableRow,
-  Paper,
+  TableContainer,
 } from '@mui/material';
 
 import './landingView.scss';

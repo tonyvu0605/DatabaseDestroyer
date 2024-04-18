@@ -2,9 +2,11 @@ import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import { palette } from '@mui/system';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
+
+import palette  from './palette';
+import overrides from './overrides';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +22,8 @@ export default function ThemeProvider({ children }) {
   );
 
   const theme = createTheme(memoizedValue);
+
+  theme.components = overrides(theme);
 
   return (
     <MUIThemeProvider theme={theme}>

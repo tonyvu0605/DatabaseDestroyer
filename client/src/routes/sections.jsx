@@ -1,23 +1,28 @@
 import { lazy } from 'react';
+import DefaultLayout from 'layouts/defaultLayout';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
+
 
 // ----------------------------------------------------------------------
 
 export const LandingPage = lazy(() => import('pages/landing'));
-
+export const LoginPage = lazy(() => import('pages/login'));
+export const RegisterPage = lazy(() => import('pages/register'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  const routes = useRoutes([
+  return useRoutes([
     {
       element: (
-        <>
-          {' '}
-          {/* LayoutWrapper would go here */}
+        <DefaultLayout>
           <Outlet />
-        </>
+        </DefaultLayout>
       ),
-      children: [{ element: <LandingPage />, index: true }],
+      children: [
+        { element: <LandingPage />, index: true },
+        { path: 'login', element: <LoginPage /> },
+        { path: 'register', element: <RegisterPage /> },
+      ],
     },
     {
       path: '*',
@@ -25,5 +30,4 @@ export default function Router() {
     },
   ]);
 
-  return routes;
 }

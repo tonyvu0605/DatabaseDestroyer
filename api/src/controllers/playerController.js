@@ -13,7 +13,6 @@ export const getPlayerById = async (req, res, next) => {
 export const get10Players = async (req, res, next) => {
   try {
     const playerData = await fetch10Players();
-    console.log(playerData);
     return res.status(200).json(playerData);
   } catch (err) {
     next(err);

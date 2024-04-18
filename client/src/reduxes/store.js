@@ -11,6 +11,7 @@ import {
   persistReducer,
 } from 'redux-persist';
 
+import authReducer from './authSlice';
 import playerReducer from './playerSlice';
 import darkModeReducer from './darkModeSlice';
 
@@ -22,6 +23,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   darkMode: darkModeReducer,
+  auth: authReducer,
   player: playerReducer,
 });
 
