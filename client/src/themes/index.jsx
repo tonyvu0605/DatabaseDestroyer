@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 
 import palette  from './palette';
+import { typography } from './typography';
 import overrides from './overrides';
 
 // ----------------------------------------------------------------------
@@ -17,6 +18,7 @@ export default function ThemeProvider({ children }) {
   const memoizedValue = useMemo(
     () => ({
       palette: { mode: currentMode, ...palette(currentMode) },
+      typography,
     }),
     [currentMode]
   );
