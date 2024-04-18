@@ -1,10 +1,23 @@
 import { makeRequest } from 'configs/axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+// ----------------------------------------------------------------------
 
-export const loginUser = createAsyncThunk('auth/loginUser', async (loginData, { rejectWithValue }) => {
+export const loginUser = createAsyncThunk('auth/loginUser', async ({ email, password }, { rejectWithValue }) => {
   try {
-    const response = await makeRequest.post(`/auth/login`, loginData);
+
+    if (!email || !password){
+      return rejectWithValue('Please fill in all fields');
+    }
+
+
+    const response = await makeRequest.post(`/auth/login`, { email, password });
+
+    if(response.data.error){
+      return rejectWithValue(response.data.error);
+    }
+
+    console.log(response.data.user);
 
     return response.data.user;
   } catch (err) {
@@ -16,12 +29,21 @@ export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async ({ email, password, confirmPassword }, { rejectWithValue }) => {
 
-    if (password!== confirmPassword) {
+    if (!email || !password || !confirmPassword){
+      return rejectWithValue('Please fill in all fields');
+    }
+
+    if (password !== confirmPassword) {
       return rejectWithValue('Passwords do not match');
     }
 
     try {
       const response = await makeRequest.post(`/auth/register`, { email, password, confirmPassword });
+
+      if(response.data.error){
+        return rejectWithValue(response.data.error);
+      }
+
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -56,22 +78,23 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.playerData = action.payload;
+        state.currentUser = action.payload;
+        state.error = null;
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = `Login Error: ${action.error.message}` ;
+        state.error = `Login Error: ${action.payload}` ;
         state.loading = false;
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.playerData = action.payload;
+      .addCase(registerUser.fulfilled, (state) => {
+        state.error = null;
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = `Register Error: ${action.payload}` ;
         state.loading = false;
       })
       .addCase(logoutUser.fulfilled, (state, action) => {

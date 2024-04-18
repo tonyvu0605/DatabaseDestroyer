@@ -1,13 +1,13 @@
 import express from 'express';
-import { get10Players, getPlayerById } from '../controllers/playerController.js';
+import { register, login, logout } from '../controllers/authController.js';
 import errorHandler from '../middlewares/errorHandler.js';
-import verifyToken from '../middlewares/verifyToken.js';
 // ----------------------------------------------------------------------
 
 const router = express.Router();
 
-router.get('/player-id', verifyToken, getPlayerById);
-router.get('/random', get10Players);
+router.post('/register', register);
+router.post('/login', login);
+router.post('/logout', logout);
 
 router.use(errorHandler);
 

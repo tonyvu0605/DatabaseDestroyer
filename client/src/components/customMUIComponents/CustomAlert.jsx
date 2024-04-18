@@ -7,12 +7,12 @@ import { Alert } from '@mui/material';
 
 const CustomAlert = ({error, sx, severity='error', className, props}) => {
 
-  if (!error) {
+  if (!error || typeof error !== 'string') {
     return null;
   }
 
   return (
-    <Alert {...props} className={className} sx={sx} severity={severity}>{error}</Alert>
+    <Alert {...props} className={className} sx={{...sx, marginTop: '1rem'}} severity={severity}>{error}</Alert>
   );
 };
 

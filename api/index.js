@@ -9,6 +9,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import playerRoutes from './src/routes/playerRoutes.js';
 import logger from './src/utils/logger.js';
+import authRoutes from './src/routes/authRoutes.js';
+// ----------------------------------------------------------------------
 
 dotenv.config();
 
@@ -32,6 +34,7 @@ app.use(helmet());
 app.use(morgan('common'));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/player', playerRoutes);
 
 // Error handling

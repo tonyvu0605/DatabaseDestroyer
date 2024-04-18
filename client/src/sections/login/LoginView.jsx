@@ -23,7 +23,7 @@ const LoginView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(loginUser(email, password));
+    await dispatch(loginUser({email, password}));
 
     if (!error) {
       navigate('/');

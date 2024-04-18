@@ -1,20 +1,22 @@
-export const primaryFont = 'Montserrat, sans-serif';
-export const secondaryFont = 'Open Sans, sans-serif';
 
 export function responsiveFontSizes({ sm, md, lg }) {
   return {
     fontSize: sm,
-    '@include mediaUp(sm)': {
+    '@media (min-width: 600px)': {
       fontSize: sm,
     },
-    '@include mediaUp(md)': {
+    '@media (min-width: 960px)': {
       fontSize: md,
     },
-    '@include mediaUp(lg)': {
+    '@media (min-width: 1280px)': {
       fontSize: lg,
     },
   };
 }
+
+
+export const primaryFont = 'Montserrat, sans-serif';
+export const secondaryFont = 'Open Sans, sans-serif';
 
 export const typography = {
   fontFamily: primaryFont,

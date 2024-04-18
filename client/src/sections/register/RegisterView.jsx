@@ -27,7 +27,7 @@ const RegisterView = () => {
     await dispatch(registerUser({email, password, confirmPassword}));
 
     if (!error) {
-      navigate('/');
+      navigate('/login');
     }
   };
 

@@ -27,7 +27,6 @@ function NavBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const darkMode = useSelector((state) => state.darkMode);
   const currentUser = useSelector((state) => state.auth.currentUser);
-
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
@@ -74,8 +73,13 @@ function NavBar() {
 
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar />
+              {currentUser && currentUser.email ? (
+                <Avatar>{currentUser.email[0].toUpperCase()}</Avatar>
+              ) : (
+                <Avatar />
+              )}
             </IconButton>
+          </Tooltip>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -93,11 +97,11 @@ function NavBar() {
             >
               <MenuItem onClick={handleDarkModeClick}>
                 <ListItemIcon>
-                  {darkMode ?
-                  <Iconify icon="tdesign:mode-light"/>
-                    :
-                    <Iconify icon="tdesign:mode-dark"/>
-                  }
+                  {darkMode ? (
+                    <Iconify icon="tdesign:mode-light" />
+                  ) : (
+                    <Iconify icon="tdesign:mode-dark" />
+                  )}
                 </ListItemIcon>
                 <Typography textAlign="center">{darkMode ? 'Light Mode' : 'Dark Mode'}</Typography>
               </MenuItem>
@@ -105,28 +109,27 @@ function NavBar() {
               {currentUser ? (
                 <MenuItem onClick={handleLogoutClick}>
                   <ListItemIcon>
-                    <Iconify icon="material-symbols:logout"/>
+                    <Iconify icon="material-symbols:logout" />
                   </ListItemIcon>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               ) : (
-                <>
-                  <MenuItem onClick={handleLoginClick}>
+                [
+                  <MenuItem key="login" onClick={handleLoginClick}>
                     <ListItemIcon>
-                      <Iconify icon="material-symbols:login"/>
+                      <Iconify icon="material-symbols:login" />
                     </ListItemIcon>
                     <Typography textAlign="center">Login</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleRegisterClick}>
+                  </MenuItem>,
+                  <MenuItem key="register" onClick={handleRegisterClick}>
                     <ListItemIcon>
-                      <Iconify icon="mdi:register"/>
+                      <Iconify icon="mdi:register" />
                     </ListItemIcon>
                     <Typography textAlign="center">Register</Typography>
-                  </MenuItem>
-                </>
+                  </MenuItem>,
+                ]
               )}
             </Menu>
-          </Tooltip>
         </Toolbar>
       </AppBar>
       <Toolbar />
