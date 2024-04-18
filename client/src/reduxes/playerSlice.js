@@ -2,11 +2,11 @@ import { makeRequest } from 'configs/axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Async thunks
-export const fetchPlayerById = createAsyncThunk(
-  'players/fetchPlayerById',
-  async (_, { rejectWithValue }) => {
+export const fetchPlayers = createAsyncThunk(
+  'players/fetchPlayer',
+  async ({searchQuery, limit, offset, orderBy, order}, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get('/player/player_id');
+      const response = await makeRequest.get(`/player/search/${encodeURIComponent(searchQuery)}?offset=${offset}&limit=${limit}&orderBy=${orderBy}&order=${order}`);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
@@ -38,14 +38,14 @@ const playerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPlayerById.pending, (state) => {
+      .addCase(fetchPlayers.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchPlayerById.fulfilled, (state, action) => {
+      .addCase(fetchPlayers.fulfilled, (state, action) => {
         state.playerData = action.payload;
         state.loading = false;
       })
-      .addCase(fetchPlayerById.rejected, (state, action) => {
+      .addCase(fetchPlayers.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       })
