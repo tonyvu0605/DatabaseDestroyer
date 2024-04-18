@@ -8,15 +8,14 @@ import { toggleDarkMode } from 'reduxes/darkModeSlice';
 import {
   Box,
   Menu,
-  Stack,
   Avatar,
   AppBar,
+  Button,
   Tooltip,
   Toolbar,
   MenuItem,
   Typography,
-  IconButton,
-  ListItemIcon,
+  IconButton, ListItemIcon,
 } from '@mui/material';
 
 import './navBar.scss';
@@ -64,17 +63,12 @@ function NavBar() {
     <div className="NavBar">
       <AppBar elevation={0}>
         <Toolbar className="Navbar__Container">
-          <Stack direction="row" alignItems="center" spacing={1} className="navbarSection">
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ cursor: 'pointer' }}
-              onClick={handleHomeClick}
-            >
+          <Button onClick={handleHomeClick} className="NavBar__Button">
+            <img src="/assets/ddLogoFavEdit.svg" className="NavBar__Button__Logo" alt="Database Destroyer Logo"/>
+            <Typography variant="h5" className="NavBar__Button__Title" sx={{color: 'text.primary'}}>
               Database Destroyer
             </Typography>
-          </Stack>
+          </Button>
 
           <Box sx={{ flexGrow: 1 }} />
 
