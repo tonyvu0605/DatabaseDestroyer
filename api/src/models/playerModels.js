@@ -8,6 +8,35 @@ export const fetchPlayerById = async (player_id) => {
   return executeQuery(getLikesSQL, [player_id]);
 };
 
+export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order }) => {
+  const getPlayersSQL = `
+      SELECT *
+      FROM Players
+      WHERE player_name LIKE ?
+      ORDER BY ? ?
+      LIMIT ?
+          OFFSET ?;
+  `;
+
+  const getCountSQL = `
+    SELECT COUNT(*) AS total
+    FROM Players
+    WHERE player_name LIKE ?;
+  `;
+
+  const [players, countResult] = await Promise.all([
+    executeQuery(getPlayersSQL, [searchQuery, orderBy, order, limit, offset]),
+    executeQuery(getCountSQL, [searchQuery]),
+  ]);
+
+  const totalCount = countResult[0].total;
+
+  return {
+    players,
+    totalCount,
+  };
+};
+
 export const fetch10Players = async () => {
   const getLikesSQL = `SELECT *
                        FROM Players

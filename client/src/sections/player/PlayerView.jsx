@@ -38,7 +38,7 @@ const PlayerView = () => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('player_name');
 
-  const playerData = useSelector((state) => state.player.playerData);
+  const { playerData, totalCount } = useSelector((state) => state.player);
 
   useEffect(() => {
     dispatch(fetchPlayers({ searchQuery, limit, offset, orderBy, order }));
@@ -119,9 +119,9 @@ const PlayerView = () => {
               </TableBody>
             </Table>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[5, 10]}
               component="div"
-              count={playerData.length}
+              count={totalCount}
               rowsPerPage={limit}
               page={offset / limit}
               onPageChange={handleChangePage}

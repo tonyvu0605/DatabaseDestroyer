@@ -23,6 +23,10 @@ const LandingView = () => {
     dispatch(fetch10Players());
   }, [dispatch]);
 
+  console.log(playerData);
+
+
+
   return (
     <div className="Landing">
       <TableContainer component={Paper}>
