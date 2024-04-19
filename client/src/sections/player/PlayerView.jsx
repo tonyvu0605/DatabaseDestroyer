@@ -33,7 +33,7 @@ const headCells = [
 const PlayerView = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('player_name');
@@ -119,7 +119,7 @@ const PlayerView = () => {
               </TableBody>
             </Table>
             <TablePagination
-              rowsPerPageOptions={[5, 10]}
+              rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={totalCount}
               rowsPerPage={limit}

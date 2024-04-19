@@ -1,6 +1,6 @@
 @import "themes/global.scss";
 
-.default-layout{
+.NullUserLayout{
   display: flex;
   flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100);
@@ -9,7 +9,6 @@
     width: 100%;
     height: 100%;
     flex: 1;
-    flex-direction: row;
     display: flex;
   }
 }

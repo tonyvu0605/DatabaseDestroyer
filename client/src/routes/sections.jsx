@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import DefaultLayout from 'layouts/defaultLayout';
+import NullUserLayout from 'layouts/nullUserLayout';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 
@@ -21,9 +22,18 @@ export default function Router() {
       ),
       children: [
         { element: <LandingPage />, index: true },
+        { path: 'player', element: <PlayerPage /> },
+      ],
+    },
+    {
+      element: (
+        <NullUserLayout>
+          <Outlet />
+        </NullUserLayout>
+      ),
+      children: [
         { path: 'login', element: <LoginPage /> },
         { path: 'register', element: <RegisterPage /> },
-        { path: 'player', element: <PlayerPage /> },
       ],
     },
     {
