@@ -14,6 +14,7 @@ const NavColumn = () => {
     { path: '/', label: 'Home', icon: <Iconify icon='iconamoon:home'/> },
     { path: '/player', label: 'Player', icon: <Iconify icon='tabler:user-search'/> },
     { path: '/team', label: 'Team', icon: <Iconify icon='fluent:people-team-32-regular'/> },
+    { path: '/game', label: 'Game', icon: <Iconify icon='game-icons:basketball-basket'/> },
   ];
 
   const handleNavigation = (path) => {

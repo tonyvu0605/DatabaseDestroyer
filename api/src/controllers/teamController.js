@@ -18,7 +18,7 @@ export const searchTeams = async (req, res, next) => {
         searchQuery = searchQuery ? `%${searchQuery.trim()}%` : '%%';
         limit = parseInt(limit, 10) || 5;
         offset = parseInt(offset, 10) || 0;
-        orderBy = orderBy ? `${orderBy.trim()}` : 'player_name';
+        orderBy = orderBy ? `${orderBy.trim()}` : 'team_name';
         order = order ? `${order.trim()}` : 'ASC';
 
         const teamData = await fetchTeams({ searchQuery, limit, offset, orderBy, order });

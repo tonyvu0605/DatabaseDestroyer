@@ -11,6 +11,7 @@ import playerRoutes from './src/routes/playerRoutes.js';
 import logger from './src/utils/logger.js';
 import authRoutes from './src/routes/authRoutes.js';
 import teamRoutes from "./src/routes/teamRoutes.js";
+import gameRoutes from "./src/routes/gameRoutes.js";
 // ----------------------------------------------------------------------
 
 dotenv.config();
@@ -38,6 +39,7 @@ app.use(morgan('common'));
 app.use('/api/auth', authRoutes);
 app.use('/api/player', playerRoutes);
 app.use('/api/team', teamRoutes);
+app.use('/api/game', gameRoutes);
 
 // Error handling
 process.on('uncaughtException', (error) => {
