@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import playerRoutes from './src/routes/playerRoutes.js';
 import logger from './src/utils/logger.js';
 import authRoutes from './src/routes/authRoutes.js';
+import teamRoutes from "./src/routes/teamRoutes.js";
 // ----------------------------------------------------------------------
 
 dotenv.config();
@@ -36,6 +37,7 @@ app.use(morgan('common'));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/player', playerRoutes);
+app.use('/api/team', teamRoutes);
 
 // Error handling
 process.on('uncaughtException', (error) => {
