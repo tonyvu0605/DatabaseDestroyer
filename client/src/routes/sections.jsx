@@ -10,6 +10,7 @@ export const LandingPage = lazy(() => import('pages/landing'));
 export const LoginPage = lazy(() => import('pages/login'));
 export const RegisterPage = lazy(() => import('pages/register'));
 export const PlayerPage = lazy(() => import('pages/player'));
+export const TeamPage = lazy(() => import('pages/team'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -23,6 +24,16 @@ export default function Router() {
       children: [
         { element: <LandingPage />, index: true },
         { path: 'player', element: <PlayerPage /> },
+      ],
+    },
+    {
+      element: (
+          <DefaultLayout>
+            <Outlet />
+          </DefaultLayout>
+      ),
+      children: [
+        { path: 'team', element: <TeamPage /> },
       ],
     },
     {
