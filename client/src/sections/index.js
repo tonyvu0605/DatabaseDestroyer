@@ -4,3 +4,4 @@ export { PlayerView } from './player';
 export { LandingView } from './landing';
 export { RegisterView } from './register';
 export { TopPlayerSalariesView } from './topPlayerSalaries';
+export { TeamSalariesByYearView } from './teamSalariesByYear'

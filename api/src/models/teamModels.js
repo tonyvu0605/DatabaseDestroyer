@@ -44,3 +44,11 @@ export const fetch10Teams = async () => {
 
     return executeQuery(getLikesSQL, []);
 };
+
+export const fetchTeamSalariesByYear = async () => {
+    const getLikesSQL = `SELECT *
+                       FROM Teams
+                       LIMIT 10;`;
+
+    return executeQuery(getLikesSQL, []);
+};
