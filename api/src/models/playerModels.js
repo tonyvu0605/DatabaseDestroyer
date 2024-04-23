@@ -45,11 +45,15 @@ export const fetch10Players = async () => {
   return executeQuery(getLikesSQL, []);
 };
 
-export const topPlayerSalaries = async () => {
-  const getLikesSQL = `SELECT player_name, AVG(salary) as average_salary
-                      FROM Player_Salaries
-                      GROUP BY player_name
-                      ORDER BY average_salary DESC`;
+export const fetchTopPlayerSalaries = async () => {
+  const getLikesSQL = `
+    SELECT player_name, AVG(salary) as average_salary
+    FROM Player_Salaries
+    INNER JOIN Players ON Player_Salaries.player_id = Players.player_id
+    GROUP BY player_name
+    ORDER BY average_salary DESC
+  `;
 
   return executeQuery(getLikesSQL, []);
 };
+

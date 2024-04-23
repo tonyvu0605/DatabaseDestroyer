@@ -1,17 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 
-import { PlayerView } from 'src/sections';
+import { TopPlayerSalariesView } from 'src/sections';
 
 // ----------------------------------------------------------------------
 
-export default function PlayerPage() {
+export default function TopPlayerSalariesPage() {
   return (
     <>
       <Helmet>
-        <title> Player </title>
+        <title>Top Player Salaries</title>
       </Helmet>
-
-      <PlayerView />
+      <TopPlayerSalariesView />
     </>
   );
 }

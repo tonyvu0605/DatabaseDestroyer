@@ -15,6 +15,7 @@ import authReducer from './authSlice';
 import teamReducer from './teamSlice';
 import playerReducer from './playerSlice';
 import darkModeReducer from './darkModeSlice';
+import topPlayerSalariesReducer from './topPlayerSalariesSlice';
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   player: playerReducer,
   team: teamReducer,
+  topPlayerSalaries: topPlayerSalariesReducer, 
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
