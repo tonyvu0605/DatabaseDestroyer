@@ -4,7 +4,7 @@ import {
     getPlayerById,
     searchPlayers,
     getTopPlayerSalaries,
-    getTeamSalariesByYear, getAveragePlayerSalariesByYear
+    getAveragePlayerSalariesByYear
 } from '../controllers/playerController.js';
 import errorHandler from '../middlewares/errorHandler.js';
 import verifyToken from '../middlewares/verifyToken.js';
