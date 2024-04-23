@@ -1,4 +1,4 @@
-import { fetch10Players, fetchPlayerById, fetchTopPlayerSalaries } from '../models/playerModels.js';
+import { fetch10Players, fetchPlayerById, fetchTopPlayerSalaries, fetchTeamSalariesByYear } from '../models/playerModels.js';
 // ----------------------------------------------------------------------
 
 export const getPlayerById = async (req, res, next) => {
@@ -41,6 +41,16 @@ export const get10Players = async (req, res, next) => {
 export const getTopPlayerSalaries = async (req, res, next) => {
   try {
     const playerData = await fetchTopPlayerSalaries();
+    return res.status(200).json(playerData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getAveragePlayerSalariesByYear = async (req, res, next) => {
+  try {
+    const playerData = await fetchTeamSalariesByYear(req.query.year);
+
     return res.status(200).json(playerData);
   } catch (err) {
     next(err);

@@ -13,6 +13,7 @@ export const PlayerPage = lazy(() => import('pages/player'));
 export const TeamPage = lazy(() => import('pages/team'));
 export const TopPlayerSalariesPage = lazy(() => import('pages/topPlayerSalaries'));
 export const TeamSalariesPage = lazy(() => import('pages/teamSalariesByYear'));
+export const AveragePlayerSalariesPage = lazy(() => import('pages/averagePlayerSalaries'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -27,6 +28,7 @@ export default function Router() {
         { element: <LandingPage />, index: true },
         { path: 'player', element: <PlayerPage /> },
         { path: 'topPlayerSalaries', element: <TopPlayerSalariesPage /> },
+        { path: 'averagePlayerSalaries', element: <AveragePlayerSalariesPage /> },
       ],
     },
     {
