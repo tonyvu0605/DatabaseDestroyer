@@ -2,8 +2,11 @@ import { executeQuery } from '../utils/dbHelpers.js';
 
 export const fetchPlayerById = async (player_id) => {
   const getLikesSQL = `SELECT *
-                       FROM Players
-                       WHERE "player_id" = ?;`;
+                       FROM Players p
+                       JOIN Players_Teams pt ON p.player_id = pt.player_id
+                       JOIN Teams t ON pt.team_id = t.team_id
+                       WHERE player_id = ?
+                       ORDER BY pt.;`;
 
   return executeQuery(getLikesSQL, [player_id]);
 };

@@ -3,7 +3,9 @@ import { fetch10Players, fetchPlayerById, fetchPlayers } from '../models/playerM
 
 export const getPlayerById = async (req, res, next) => {
   try {
-    const playerData = await fetchPlayerById(req.query.player_id);
+
+    const playerData = await fetchPlayerById(req.params.player_id);
+    console.log(playerData);
 
     return res.status(200).json(playerData);
   } catch (err) {
