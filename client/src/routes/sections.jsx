@@ -11,6 +11,8 @@ export const LoginPage = lazy(() => import('pages/login'));
 export const RegisterPage = lazy(() => import('pages/register'));
 export const PlayerPage = lazy(() => import('pages/player'));
 export const PlayerProfilePage = lazy(() => import('pages/playerProfile'));
+export const TeamPage = lazy(() => import('pages/team'));
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -25,6 +27,7 @@ export default function Router() {
         { element: <LandingPage />, index: true },
         { path: 'player', element: <PlayerPage /> },
         { path: 'player/:id', element: <PlayerProfilePage /> },
+        { path: 'team', element: <TeamPage /> },
       ],
     },
     {
