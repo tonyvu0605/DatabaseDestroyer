@@ -17,6 +17,7 @@ import playerReducer from './playerSlice';
 import darkModeReducer from './darkModeSlice';
 import teamPerformanceReducer from './teamPerformanceSlice'
 import teamSalariesReducer from './teamSalariesByYearSlice'
+import highScoringGameReducer from './highScoringGameSlice'
 import topPlayerSalariesReducer from './topPlayerSalariesSlice';
 import averagePlayerSalariesReducer from './averagePlayerSalariesSlice';
 import seasonalPointsAverageReducer from './seasonalPointsAverageSlice';
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   averagePlayerSalaries: averagePlayerSalariesReducer,
   teamPerformance: teamPerformanceReducer,
   seasonalPointsAverage: seasonalPointsAverageReducer,
+  highScoringGame: highScoringGameReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

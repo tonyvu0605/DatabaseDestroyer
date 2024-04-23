@@ -14,7 +14,7 @@ const NavColumn = () => {
     { path: '/', label: 'Home', icon: <Iconify icon='iconamoon:home'/> },
     { path: '/player', label: 'Player', icon: <Iconify icon='tabler:user-search'/> },
     { path: '/team', label: 'Team', icon: <Iconify icon='fluent:people-team-32-regular'/> },
-    { path: '/game', label: 'Game', icon: <Iconify icon='game-icons:basketball-basket'/> },
+    { path: '/highScoringGame', label: 'High Scoring Game', icon: <Iconify icon='game-icons:basketball-basket'/> },
     { path: '/topPlayerSalaries', label: 'Top Player Salaries', icon: <Iconify icon='tabler:moneybag'/> },
     { path: '/teamSalaries', label: 'Team Salaries By Year', icon: <Iconify icon='fluent:people-money-24-regular'/> },
     { path: '/averagePlayerSalaries', label: 'Average Player Salaries By Year', icon: <Iconify icon='fluent:receipt-money-24-regular'/> },
