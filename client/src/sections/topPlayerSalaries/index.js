@@ -1,1 +1,1 @@
-export { default as PlayerView } from './PlayerView';
+export { default as PlayerView } from './topPlayerSalariesView';
