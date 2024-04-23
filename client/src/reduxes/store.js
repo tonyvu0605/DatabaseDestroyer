@@ -19,6 +19,7 @@ import teamPerformanceReducer from './teamPerformanceSlice'
 import teamSalariesReducer from './teamSalariesByYearSlice'
 import topPlayerSalariesReducer from './topPlayerSalariesSlice';
 import averagePlayerSalariesReducer from './averagePlayerSalariesSlice';
+import seasonalPointsAverageReducer from './seasonalPointsAverageSlice';
 
 const persistConfig = {
   key: 'root',
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   teamSalaries: teamSalariesReducer,
   averagePlayerSalaries: averagePlayerSalariesReducer,
   teamPerformance: teamPerformanceReducer,
+  seasonalPointsAverage: seasonalPointsAverageReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

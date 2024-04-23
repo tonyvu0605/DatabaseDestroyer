@@ -15,6 +15,7 @@ export const TopPlayerSalariesPage = lazy(() => import('pages/topPlayerSalaries'
 export const TeamSalariesPage = lazy(() => import('pages/teamSalariesByYear'));
 export const AveragePlayerSalariesPage = lazy(() => import('pages/averagePlayerSalaries'));
 export const TeamPerformancePage = lazy(() => import('pages/teamPerformance'));
+export const SeasonalPointsAveragePage = lazy(() => import('pages/seasonalPointsAverage'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -30,6 +31,7 @@ export default function Router() {
         { path: 'player', element: <PlayerPage /> },
         { path: 'topPlayerSalaries', element: <TopPlayerSalariesPage /> },
         { path: 'averagePlayerSalaries', element: <AveragePlayerSalariesPage /> },
+        { path: 'seasonalPointsAverage', element: <SeasonalPointsAveragePage /> },
       ],
     },
     {

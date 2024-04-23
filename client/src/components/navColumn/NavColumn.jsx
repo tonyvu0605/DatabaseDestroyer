@@ -19,6 +19,7 @@ const NavColumn = () => {
     { path: '/teamSalaries', label: 'Team Salaries By Year', icon: <Iconify icon='fluent:people-money-24-regular'/> },
     { path: '/averagePlayerSalaries', label: 'Average Player Salaries By Year', icon: <Iconify icon='fluent:receipt-money-24-regular'/> },
     { path: '/teamPerformance', label: 'Team Performance', icon: <Iconify icon='grommet-icons:document-performance'/> },
+    { path: '/seasonalPointsAverage', label: 'Seasonal Points Average', icon: <Iconify icon='fluent:calendar-arrow-counterclockwise-48-regular'/> },
   ];
 
   const handleNavigation = (path) => {

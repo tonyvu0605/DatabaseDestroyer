@@ -7,4 +7,5 @@ export { TeamPerformanceView } from './teamPerformance'
 export { TopPlayerSalariesView } from './topPlayerSalaries';
 export { TeamSalariesByYearView } from './teamSalariesByYear'
 export { AveragePlayerSalariesView } from './averagePlayerSalaries'
+export { SeasonalPointsAverageView } from './seasonalPointsAverage'
 
