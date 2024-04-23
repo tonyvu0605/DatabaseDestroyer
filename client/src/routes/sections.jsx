@@ -11,6 +11,7 @@ export const LoginPage = lazy(() => import('pages/login'));
 export const RegisterPage = lazy(() => import('pages/register'));
 export const PlayerPage = lazy(() => import('pages/player'));
 export const TeamPage = lazy(() => import('pages/team'));
+export const topPlayerSalariesPage = lazy(() => import('pages/topplayersalaries'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -24,6 +25,7 @@ export default function Router() {
       children: [
         { element: <LandingPage />, index: true },
         { path: 'player', element: <PlayerPage /> },
+        { path: 'topPlayerSalaries', element: <topPlayerSalariesPage /> },
       ],
     },
     {
