@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTopPlayerSalaries } from 'reduxes/topPlayerSalariesSlice';
 
+import './topPlayerSalariesView.scss'; 
+
 const TopPlayerSalariesView = () => {
   const dispatch = useDispatch();
   const { data: salaries } = useSelector(state => state.topPlayerSalaries);
@@ -13,7 +15,7 @@ const TopPlayerSalariesView = () => {
   const headers = salaries.length > 0 ? Object.keys(salaries[0]) : [];
 
   return (
-    <div>
+    <div className="TopPlayerSalariesView">  
       <h1>Top Player Salaries</h1>
       <table>
         <thead>
@@ -38,5 +40,3 @@ const TopPlayerSalariesView = () => {
 };
 
 export default TopPlayerSalariesView;
-
-
