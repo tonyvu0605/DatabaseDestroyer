@@ -7,10 +7,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import {
   Card,
-  Container, Typography, CardContent,
+  Container,
+  Typography,
+  CardContent,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@mui/material';
 
 import './playerProfileView.scss';
+import {fetchPlayerSalaryInfo} from "reduxes/averagePlayerSalariesSlice";
 
 
 const PlayerProfileView = () => {
@@ -18,14 +28,16 @@ const PlayerProfileView = () => {
   const playerId = parseInt(useLocation().pathname.split('/')[2], 10);
 
   const [ playerData ] = useSelector((state) => state.player.playerData);
+  const playerSalaryInfo = useSelector((state) => state.averagePlayerSalaries.data);
 
   useEffect(() => {
     dispatch(fetchPlayerById(playerId));
+    dispatch(fetchPlayerSalaryInfo(playerId))
   }, [dispatch, playerId]);
 
 
-  if(!playerData) return null;
-  console.log(playerData);
+  if(!playerData || !playerSalaryInfo) return null;
+  console.log(playerSalaryInfo);
 
   return (
     <Container maxWidth="lg" className="PlayerProfileView">
@@ -41,6 +53,9 @@ const PlayerProfileView = () => {
           <Box className="PlayerProfileView__cardMedia__container">
             <Typography variant="h3" className="PlayerProfileView__cardMedia__infoText">
               {playerData.player_name}
+            </Typography>
+            <Typography variant="h6" className="PlayerProfileView__cardMedia__infoText">
+              <Iconify icon="solar:money-bag-outline" />&nbsp;Avg Salary: {Math.trunc(playerSalaryInfo[0]?.average_salary)}m
             </Typography>
             <Typography variant="h6" className="PlayerProfileView__cardMedia__infoText">
               <Iconify icon="mingcute:cake-line" />&nbsp;DOB: {new Date(playerData.birthdate).toLocaleDateString()}
@@ -78,6 +93,29 @@ const PlayerProfileView = () => {
             </Typography>
           </Box>
         </Box>
+        <Typography variant="h5" className="PlayerProfileView__cardTitle">
+            Salary History
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Year</TableCell>
+                <TableCell align="right">Salary</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {playerSalaryInfo.map((salaryInfo) => (
+                  <TableRow key={salaryInfo.year}>
+                    <TableCell component="th" scope="row">
+                      {salaryInfo.year}
+                    </TableCell>
+                    <TableCell align="right">{salaryInfo.salary}</TableCell>
+                  </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
         <CardContent/>
       </Card>
     </Container>
