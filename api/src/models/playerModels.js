@@ -11,7 +11,6 @@ export const fetchPlayerById = async (player_id) => {
 };
 
 export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order }) => {
-
   const getPlayersSQL = `
       SELECT *
       FROM Players
