@@ -1,5 +1,11 @@
 import express from 'express';
-import {get10Teams, getTeamById, getTeamSalariesByYear, searchTeams, getTeamPerformance} from '../controllers/teamController.js';
+import {
+  get10Teams,
+  getTeamById,
+  getTeamSalariesByYear,
+  searchTeams,
+  getTeamPerformance,
+} from '../controllers/teamController.js';
 import errorHandler from '../middlewares/errorHandler.js';
 import verifyToken from '../middlewares/verifyToken.js';
 // ----------------------------------------------------------------------

@@ -2,7 +2,9 @@ import {
   fetch10Players,
   fetchPlayerById,
   fetchTopPlayerSalaries,
-  fetchAveragePlayerSalaries
+  fetchAveragePlayerSalaries,
+  fetchPlayers,
+  fetchSalariesWithAvgsById,
 } from '../models/playerModels.js';
 // ----------------------------------------------------------------------
 
@@ -64,3 +66,13 @@ export const getAveragePlayerSalariesByYear = async (req, res, next) => {
   }
 };
 
+export const getPlayerSalariesInfo = async (req, res, next) => {
+  try {
+    const player_id = parseInt(req.query.player_id, 10);
+    const playerData = await fetchSalariesWithAvgsById(player_id);
+
+    return res.status(200).json(playerData);
+  } catch (err) {
+    next(err);
+  }
+};

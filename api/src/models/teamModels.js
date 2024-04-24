@@ -46,8 +46,7 @@ export const fetch10Teams = async () => {
 };
 
 export const fetchTeamSalariesByYear = async (year) => {
-    const getLikesSQL =
-        `WITH cte1 as
+  const getLikesSQL = `WITH cte1 as
             (SELECT Teams.team_name as team_name, Players_Teams.team_id as team_id,
                     Players_Teams.player_id as player_id, Player_Salaries.year as year,
                     Player_Salaries.salary as salary
@@ -60,12 +59,11 @@ export const fetchTeamSalariesByYear = async (year) => {
         GROUP BY team_name, year
         ORDER BY total_salary DESC;`;
 
-    return executeQuery(getLikesSQL, [year]);
+  return executeQuery(getLikesSQL, [year]);
 };
 
 export const fetchTeamPerformance = async (name) => {
-    const getLikesSQL =
-        `With cte1 as (
+  const getLikesSQL = `With cte1 as (
             Select Games.season,
                    CASE
                        WHEN Games.home_team_id = Teams.team_id AND Games.team_won = ‘home’ then ‘win’
@@ -92,5 +90,5 @@ export const fetchTeamPerformance = async (name) => {
          ORDER BY season
         `;
 
-    return executeQuery(getLikesSQL, [name]);
+  return executeQuery(getLikesSQL, [name]);
 };
