@@ -3,20 +3,20 @@ import { executeQuery } from '../utils/dbHelpers.js';
 export const fetchPlayerById = async (player_id) => {
   const getLikesSQL = `SELECT *
                        FROM Players p
-                       JOIN Players_Teams pt ON p.player_id = pt.player_id
-                       JOIN Teams t ON pt.team_id = t.team_id
-                       WHERE player_id = ?
-                       ORDER BY pt.;`;
+                       LEFT JOIN Players_Teams pt ON p.player_id = pt.player_id
+                       LEFT JOIN Teams t ON pt.team_id = t.team_id
+                       WHERE p.player_id = ?;`;
 
   return executeQuery(getLikesSQL, [player_id]);
 };
 
 export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order }) => {
+
   const getPlayersSQL = `
       SELECT *
       FROM Players
       WHERE player_name LIKE ?
-      ORDER BY ? ?
+      ORDER BY ${orderBy} ${order}
       LIMIT ?
           OFFSET ?;
   `;
@@ -28,7 +28,7 @@ export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order 
   `;
 
   const [players, countResult] = await Promise.all([
-    executeQuery(getPlayersSQL, [searchQuery, orderBy, order, limit, offset]),
+    executeQuery(getPlayersSQL, [searchQuery, limit, offset]),
     executeQuery(getCountSQL, [searchQuery]),
   ]);
 

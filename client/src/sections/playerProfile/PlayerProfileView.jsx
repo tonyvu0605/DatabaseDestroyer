@@ -23,8 +23,9 @@ const PlayerProfileView = () => {
     dispatch(fetchPlayerById(playerId));
   }, [dispatch, playerId]);
 
-  console.log(playerData);
 
+  if(!playerData) return null;
+  console.log(playerData);
 
   return (
     <Container maxWidth="lg" className="PlayerProfileView">
@@ -58,18 +59,26 @@ const PlayerProfileView = () => {
               className="PlayerProfileView__cardMedia__img"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = '/assets/nullPlayer.svg';
-                e.target.style.marginTop = '10px';
+                e.target.src = '/assets/nullPlayer.png';
               }}
             />
           </Box>
           <Box className="PlayerProfileView__cardMedia__container">
+            <img
+                src={`https://cdn.nba.com/logos/nba/${playerData.team_id}/primary/L/logo.svg`}
+                alt="Player"
+                className="PlayerProfileView__cardMedia__teamLogo"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = null;
+                }}
+            />
             <Typography variant="h4" className="PlayerProfileView__playerTeam">
-              Player Profile
+              {playerData.team_name || 'Unavailable'}
             </Typography>
           </Box>
         </Box>
-        <CardContent />
+        <CardContent/>
       </Card>
     </Container>
   );
