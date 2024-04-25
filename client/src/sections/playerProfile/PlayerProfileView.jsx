@@ -3,24 +3,24 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchPlayerById } from 'reduxes/playerSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchPlayerSalaryInfo } from "reduxes/averagePlayerSalariesSlice";
 
 import Box from '@mui/material/Box';
 import {
   Card,
+  Table,
+  Paper,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableBody,
   Container,
   Typography,
   CardContent,
-  Table,
-  TableBody,
-  TableCell,
   TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
 } from '@mui/material';
 
 import './playerProfileView.scss';
-import {fetchPlayerSalaryInfo} from "reduxes/averagePlayerSalariesSlice";
 
 
 const PlayerProfileView = () => {

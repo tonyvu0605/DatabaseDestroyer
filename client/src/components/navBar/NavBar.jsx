@@ -65,7 +65,7 @@ function NavBar() {
           <Button onClick={handleHomeClick} className="NavBar__Button">
             <img src="/assets/ddLogoFavEdit.svg" className="NavBar__Button__Logo" alt="Database Destroyer Logo"/>
             <Typography variant="h5" className="NavBar__Button__Title" sx={{color: 'text.primary'}}>
-              Database Destroyer
+              NBA Basketball Encyclopedia
             </Typography>
           </Button>
 

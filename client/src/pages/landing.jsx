@@ -8,7 +8,7 @@ export default function LandingPage() {
   return (
     <>
       <Helmet>
-        <title> NBA | The Database Destroyer </title>
+        <title> NBA Basketball Encyclopedia </title>
       </Helmet>
 
       <LandingView />
