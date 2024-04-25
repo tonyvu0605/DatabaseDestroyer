@@ -2,8 +2,10 @@ import { executeQuery } from '../utils/dbHelpers.js';
 
 export const fetchPlayerById = async (player_id) => {
   const getLikesSQL = `SELECT *
-                       FROM Players
-                       WHERE "player_id" = ?;`;
+                       FROM Players p
+                       LEFT JOIN Players_Teams pt ON p.player_id = pt.player_id
+                       LEFT JOIN Teams t ON pt.team_id = t.team_id
+                       WHERE p.player_id = ?;`;
 
   return executeQuery(getLikesSQL, [player_id]);
 };
@@ -13,7 +15,7 @@ export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order 
       SELECT *
       FROM Players
       WHERE player_name LIKE ?
-      ORDER BY ? ?
+      ORDER BY ${orderBy} ${order}
       LIMIT ?
           OFFSET ?;
   `;
@@ -25,7 +27,7 @@ export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order 
   `;
 
   const [players, countResult] = await Promise.all([
-    executeQuery(getPlayersSQL, [searchQuery, orderBy, order, limit, offset]),
+    executeQuery(getPlayersSQL, [searchQuery, limit, offset]),
     executeQuery(getCountSQL, [searchQuery]),
   ]);
 
@@ -56,3 +58,32 @@ export const fetchTopPlayerSalaries = async () => {
   return executeQuery(getLikesSQL, []);
 };
 
+export const fetchAveragePlayerSalaries = async () => {
+  const getLikesSQL = `
+    SELECT player_name, AVG(salary) as average_salary
+    FROM Player_Salaries
+    INNER JOIN Players ON Player_Salaries.player_id = Players.player_id
+    GROUP BY player_name
+    ORDER BY average_salary DESC
+  `;
+
+  return executeQuery(getLikesSQL, []);
+};
+
+export const fetchSalariesWithAvgsById = async (player_id) => {
+  const getLikesSQL = `
+    WITH psa AS (
+      SELECT ps.player_id, AVG(salary) as average_salary
+      FROM Player_Salaries ps
+      WHERE ps.player_id = ?
+      GROUP BY ps.player_id
+    )
+    SELECT ps.*, psa.average_salary
+    FROM Player_Salaries ps
+           INNER JOIN psa ON ps.player_id = psa.player_id
+    WHERE ps.player_id = ?
+    ORDER BY ps.year DESC;
+  `;
+
+  return executeQuery(getLikesSQL, [player_id, player_id]);
+};

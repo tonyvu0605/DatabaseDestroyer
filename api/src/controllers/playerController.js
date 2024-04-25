@@ -1,9 +1,18 @@
-import { fetch10Players, fetchPlayerById, fetchTopPlayerSalaries } from '../models/playerModels.js';
+import {
+  fetch10Players,
+  fetchPlayerById,
+  fetchTopPlayerSalaries,
+  fetchAveragePlayerSalaries,
+  fetchPlayers,
+  fetchSalariesWithAvgsById,
+} from '../models/playerModels.js';
 // ----------------------------------------------------------------------
 
 export const getPlayerById = async (req, res, next) => {
   try {
-    const playerData = await fetchPlayerById(req.query.player_id);
+    const player_id = parseInt(req.params.player_id, 10);
+
+    const playerData = await fetchPlayerById(player_id);
 
     return res.status(200).json(playerData);
   } catch (err) {
@@ -47,3 +56,23 @@ export const getTopPlayerSalaries = async (req, res, next) => {
   }
 };
 
+export const getAveragePlayerSalariesByYear = async (req, res, next) => {
+  try {
+    const playerData = await fetchAveragePlayerSalaries(req.query.year);
+
+    return res.status(200).json(playerData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getPlayerSalariesInfo = async (req, res, next) => {
+  try {
+    const player_id = parseInt(req.query.player_id, 10);
+    const playerData = await fetchSalariesWithAvgsById(player_id);
+
+    return res.status(200).json(playerData);
+  } catch (err) {
+    next(err);
+  }
+};

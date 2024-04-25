@@ -59,7 +59,7 @@ export const typography = {
     fontFamily: primaryFont,
     fontWeight: 700,
     lineHeight: 1.5,
-    ...responsiveFontSizes({ sm: '1rem', md: '1.25rem', lg: '1.5rem' })
+    ...responsiveFontSizes({ sm: '1rem', md: '1.25rem', lg: '1.25rem' })
   },
   subtitle1: {
     fontFamily: secondaryFont,

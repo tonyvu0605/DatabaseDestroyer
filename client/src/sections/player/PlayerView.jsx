@@ -1,4 +1,5 @@
 import { debounce } from 'lodash';
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { fetchPlayers } from 'reduxes/playerSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import { visuallyHidden } from '@mui/utils';
 import {
   Box,
   Card,
+  Link,
   Table,
   Paper,
   TableRow,
@@ -37,6 +39,7 @@ const PlayerView = () => {
   const [offset, setOffset] = useState(0);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('player_name');
+  const navigate = useNavigate();
 
   const { playerData, totalCount } = useSelector((state) => state.player);
 
@@ -67,6 +70,7 @@ const PlayerView = () => {
     setLimit(parseInt(event.target.value, 10));
     setOffset(0);
   };
+
 
   return (
     <div className="PlayerView">
@@ -107,15 +111,26 @@ const PlayerView = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {playerData.map((player) => (
-                  <TableRow key={player.player_id}>
-                    <TableCell>{player.player_name}</TableCell>
-                    <TableCell>{new Date(player.birthdate).toLocaleDateString()}</TableCell>
-                    <TableCell>{player.school}</TableCell>
-                    <TableCell>{player.height_inch}</TableCell>
-                    <TableCell>{player.weight_lbs}</TableCell>
+                {playerData.length > 0 ? (
+                  playerData.map((player) => (
+                    <TableRow
+                      key={player.player_id}
+                      component={Link}
+                      onClick={() => navigate(`/player/${player.player_id}`)}
+                      sx={{ cursor: 'pointer' }}
+                    >
+                      <TableCell>{player.player_name}</TableCell>
+                      <TableCell>{new Date(player.birthdate).toLocaleDateString()}</TableCell>
+                      <TableCell>{player.school}</TableCell>
+                      <TableCell>{player.height_inch}</TableCell>
+                      <TableCell>{player.weight_lbs}</TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={5}>No players found</TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
             <TablePagination
