@@ -130,8 +130,8 @@ const TeamView = () => {
                                 e.target.src = null;
                               }}
                           />
+                          {team.team_name}
                         </TableCell>
-                        <TableCell className="TeamView__tableCell">{team.team_name}</TableCell>
                         <TableCell className="TeamView__tableCell">{team.team_city}</TableCell>
                         <TableCell className="TeamView__tableCell">{team.team_year_founded}</TableCell>
                         <TableCell className="TeamView__tableCell">{team.state_province}</TableCell>

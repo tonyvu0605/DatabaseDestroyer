@@ -42,6 +42,7 @@ export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order 
 export const fetch10Players = async () => {
   const getLikesSQL = `SELECT *
                        FROM Players
+                       ORDER BY RAND()
                        LIMIT 10;`;
 
   return executeQuery(getLikesSQL, []);
