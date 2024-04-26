@@ -35,7 +35,6 @@ const PlayerProfileView = () => {
   }, [dispatch, playerId]);
 
   if (!playerData || !playerSalaryInfo) return null;
-  console.log(playerSalaryInfo);
 
   return (
     <Container maxWidth="lg" className="PlayerProfileView">
@@ -52,7 +51,10 @@ const PlayerProfileView = () => {
             </Typography>
             <Typography variant="h6" className="PlayerProfileView__cardMedia__infoText">
               <Iconify icon="solar:money-bag-outline" />
-              &nbsp;Avg Salary: {Math.trunc(playerSalaryInfo[0]?.average_salary)}m
+              &nbsp;Avg Salary: ${(playerSalaryInfo[0]?.average_salary / 1000000).toLocaleString(undefined, {
+              minimumFractionDigits: 1,
+              maximumFractionDigits: 1,
+            })}m
             </Typography>
             <Typography variant="h6" className="PlayerProfileView__cardMedia__infoText">
               <Iconify icon="mingcute:cake-line" />
