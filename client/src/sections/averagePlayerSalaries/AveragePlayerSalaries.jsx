@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAveragePlayerSalaries } from 'reduxes/averagePlayerSalariesSlice';
 
-import {visuallyHidden} from "@mui/utils";
+import { visuallyHidden } from "@mui/utils";
 import {
   Box,
   Card,
