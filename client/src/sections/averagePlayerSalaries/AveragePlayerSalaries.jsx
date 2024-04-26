@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAveragePlayerSalaries } from 'reduxes/averagePlayerSalariesSlice';
 
-import './averageplayersalaries.scss'; 
+import './averagePlayerSalaries.scss';
 
 const AveragePlayerSalariesView = () => {
   const dispatch = useDispatch();
