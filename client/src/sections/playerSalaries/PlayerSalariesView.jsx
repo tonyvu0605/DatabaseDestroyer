@@ -1,7 +1,7 @@
 import { debounce } from "lodash";
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAveragePlayerSalaries } from 'reduxes/averagePlayerSalariesSlice';
+import { fetchPlayerSalariesByYear } from 'reduxes/PlayerSalariesSlice';
 
 import { visuallyHidden } from "@mui/utils";
 import {
@@ -19,23 +19,23 @@ import {
   TableSortLabel,
 } from '@mui/material';
 
-import './averagePlayerSalaries.scss';
+import './PlayerSalariesView.scss';
 
 const headCells = [
   { id: 'player_name', label: 'Player Name' },
-  { id: 'average_salary', label: 'Average Salary' },
+  { id: 'average_salary', label: 'Salary' },
   { id: 'year', label: 'Year' },
 ];
 
 const AveragePlayerSalariesView = () => {
   const dispatch = useDispatch();
-  const { data: players } = useSelector(state => state.averagePlayerSalaries);
+  const { data: players } = useSelector(state => state.playerSalaries);
   const [searchQuery, setSearchQuery] = useState('');
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('player_name');
 
   useEffect(() => {
-    dispatch(fetchAveragePlayerSalaries({searchQuery, orderBy, order}));
+    dispatch(fetchPlayerSalariesByYear({searchQuery, orderBy, order}));
   }, [dispatch, order, orderBy, searchQuery]);
 
   const handleSearchChange = debounce((event) => {
@@ -51,6 +51,16 @@ const AveragePlayerSalariesView = () => {
   const createSortHandler = (property) => (event) => {
     handleRequestSort(event, property);
   };
+
+  const groupedPlayers = players.reduce((acc, player) => {
+    if (!acc[player.player_name]) {
+      acc[player.player_name] = {};
+    }
+    acc[player.player_name][player.year] = player.salary;
+    return acc;
+  }, {});
+
+  const years = [...new Set(players.map(player => player.year))].sort();
 
   return (
     <div className="AveragePlayerSalariesView">
@@ -97,7 +107,7 @@ const AveragePlayerSalariesView = () => {
                             key={index}
                         >
                           <TableCell className="AveragePlayerSalariesView__tableCell">{player.player_name}</TableCell>
-                          <TableCell className="AveragePlayerSalariesView__tableCell">{player.average_salary}</TableCell>
+                          <TableCell className="AveragePlayerSalariesView__tableCell">{player.salary}</TableCell>
                           <TableCell className="AveragePlayerSalariesView__tableCell">{player.year}</TableCell>
                         </TableRow>
                     ))

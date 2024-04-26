@@ -13,7 +13,7 @@ export const PlayerProfilePage = lazy(() => import('pages/playerProfile'));
 export const TeamPage = lazy(() => import('pages/team'));
 export const TopPlayerSalariesPage = lazy(() => import('pages/topPlayerSalaries'));
 export const TeamSalariesPage = lazy(() => import('pages/teamSalariesByYear'));
-export const AveragePlayerSalariesPage = lazy(() => import('pages/averagePlayerSalaries'));
+export const PlayerSalariesPage = lazy(() => import('pages/PlayerSalaries'));
 export const TeamPerformancePage = lazy(() => import('pages/teamPerformance'));
 export const SeasonalPointsAveragePage = lazy(() => import('pages/seasonalPointsAverage'));
 export const HighScoringGamePage = lazy(() => import('pages/highScoringGame'));
@@ -31,7 +31,7 @@ export default function Router() {
         { element: <LandingPage />, index: true },
         { path: 'player', element: <PlayerPage /> },
         { path: 'topPlayerSalaries', element: <TopPlayerSalariesPage /> },
-        { path: 'averagePlayerSalaries', element: <AveragePlayerSalariesPage /> },
+        { path: 'playerSalaries', element: <PlayerSalariesPage /> },
         { path: 'seasonalPointsAverage', element: <SeasonalPointsAveragePage /> },
         { path: 'HighScoringGame', element: <HighScoringGamePage /> },
         { path: 'player/:id', element: <PlayerProfilePage /> },

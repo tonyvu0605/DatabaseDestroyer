@@ -65,9 +65,9 @@ export const fetchTopPlayerSalaries = async () => {
   return executeQuery(getLikesSQL, []);
 };
 
-export const fetchAveragePlayerSalaries = async ({ searchQuery, orderBy, order }) => {
+export const fetchPlayerSalaries = async ({ searchQuery, orderBy, order }) => {
   const getLikesSQL = `
-  SELECT player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS average_salary, year
+  SELECT player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS salary, year
   FROM Player_Salaries
   JOIN Players P on P.player_id = Player_Salaries.player_id
   WHERE player_name LIKE ?

@@ -4,7 +4,7 @@ import {
   getPlayerById,
   searchPlayers,
   getTopPlayerSalaries,
-  getAveragePlayerSalariesByYear,
+  getPlayerSalariesByYear,
   getPlayerSalariesInfo,
 } from '../controllers/playerController.js';
 import errorHandler from '../middlewares/errorHandler.js';
@@ -17,7 +17,7 @@ router.get('/profile/:player_id', verifyToken, getPlayerById);
 router.get('/random', get10Players);
 router.get('/search', searchPlayers);
 router.get('/top_salaries', getTopPlayerSalaries);
-router.get('/average_salaries', getAveragePlayerSalariesByYear);
+router.get('/average_salaries', getPlayerSalariesByYear);
 router.get('/player_salaries', getPlayerSalariesInfo);
 
 router.use(errorHandler);

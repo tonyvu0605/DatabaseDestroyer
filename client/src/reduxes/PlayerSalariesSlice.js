@@ -1,7 +1,7 @@
 import { makeRequest } from 'configs/axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchAveragePlayerSalaries = createAsyncThunk(
+export const fetchPlayerSalariesByYear = createAsyncThunk(
   'player/fetchAveragePlayerSalaries',
   async ({ searchQuery, orderBy, order }, { rejectWithValue }) => {
     try {
@@ -25,7 +25,7 @@ export const fetchPlayerSalaryInfo = createAsyncThunk(
   }
 );
 
-const averagePlayerSalariesSlice = createSlice({
+const playerSalariesSlice = createSlice({
   name: 'averagePlayerSalaries',
   initialState: {
     data: [],
@@ -35,14 +35,14 @@ const averagePlayerSalariesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAveragePlayerSalaries.pending, (state) => {
+      .addCase(fetchPlayerSalariesByYear.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchAveragePlayerSalaries.fulfilled, (state, action) => {
+      .addCase(fetchPlayerSalariesByYear.fulfilled, (state, action) => {
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(fetchAveragePlayerSalaries.rejected, (state, action) => {
+      .addCase(fetchPlayerSalariesByYear.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       })
@@ -60,4 +60,4 @@ const averagePlayerSalariesSlice = createSlice({
   },
 });
 
-export default averagePlayerSalariesSlice.reducer;
+export default playerSalariesSlice.reducer;

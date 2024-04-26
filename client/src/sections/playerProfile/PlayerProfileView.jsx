@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchPlayerById } from 'reduxes/playerSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPlayerSalaryInfo } from 'reduxes/averagePlayerSalariesSlice';
+import { fetchPlayerSalaryInfo } from 'reduxes/PlayerSalariesSlice';
 
 import Box from '@mui/material/Box';
 import {
