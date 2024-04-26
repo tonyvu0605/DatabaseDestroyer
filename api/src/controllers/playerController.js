@@ -58,7 +58,12 @@ export const getTopPlayerSalaries = async (req, res, next) => {
 
 export const getAveragePlayerSalariesByYear = async (req, res, next) => {
   try {
-    const playerData = await fetchAveragePlayerSalaries();
+    let { searchQuery, orderBy, order } = req.query;
+    searchQuery = searchQuery ? `%${searchQuery.trim()}%` : '%%';
+    orderBy = orderBy ? `${orderBy.trim()}` : 'player_name';
+    order = order ? `${order.trim()}` : 'ASC';
+
+    const playerData = await fetchAveragePlayerSalaries({ searchQuery, orderBy, order });
 
     return res.status(200).json(playerData);
   } catch (err) {

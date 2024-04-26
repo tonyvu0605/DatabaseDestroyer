@@ -3,9 +3,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchAveragePlayerSalaries = createAsyncThunk(
   'player/fetchAveragePlayerSalaries',
-  async (_, { rejectWithValue }) => {
+  async ({ searchQuery, orderBy, order }, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get('/player/average_salaries');
+      const response = await makeRequest.get(`/player/average_salaries?searchQuery=${searchQuery}&orderBy=${orderBy}&order=${order}`);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
