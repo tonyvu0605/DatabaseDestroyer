@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAveragePlayerSalaries } from 'reduxes/averagePlayerSalariesSlice';
 
+
 import './averagePlayerSalaries.scss';
+
 
 const AveragePlayerSalariesView = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const AveragePlayerSalariesView = () => {
   const headers = players.length > 0 ? Object.keys(players[0]) : [];
 
   return (
-    <div className="TopPlayerSalariesView">
+    <div className="AveragePlayerSalariesView">
       <h1>Average Player Salaries By Year</h1>
       <table>
         <thead>

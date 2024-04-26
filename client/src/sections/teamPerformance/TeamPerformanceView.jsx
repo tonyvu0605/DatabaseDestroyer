@@ -62,7 +62,7 @@ const TeamPerformanceView = () => {
         <Card className="TeamPerformanceView__card">
           <div className="TeamPerformanceView__searchItems">
             <TextField
-              label="Search Players"
+              label="Search Team"
               variant="outlined"
               className="TeamPerformanceView__searchItems__searchInput"
               onChange={handleSearchChange}

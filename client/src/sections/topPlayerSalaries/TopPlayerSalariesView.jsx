@@ -19,20 +19,20 @@ const TopPlayerSalariesView = () => {
       <h1>Top Player Salaries</h1>
       <table>
         <thead>
-          <tr>
-            {headers.map((header) => (
+        <tr>
+          {headers.map(header => (
               <th key={header}>{header}</th>
-            ))}
-          </tr>
+          ))}
+        </tr>
         </thead>
         <tbody>
-          {salaries.map((player, index) => (
+        {salaries.map((player, index) => (
             <tr key={index}>
-              {headers.map((header) => (
-                <td key={`${header}-${index}`}>{player[header]}</td>
+              {headers.map(header => (
+                  <td key={`${header}-${index}`}>{player[header]}</td>
               ))}
             </tr>
-          ))}
+        ))}
         </tbody>
       </table>
     </div>

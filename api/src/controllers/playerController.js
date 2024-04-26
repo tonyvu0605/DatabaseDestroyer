@@ -58,7 +58,7 @@ export const getTopPlayerSalaries = async (req, res, next) => {
 
 export const getAveragePlayerSalariesByYear = async (req, res, next) => {
   try {
-    const playerData = await fetchAveragePlayerSalaries(req.query.year);
+    const playerData = await fetchAveragePlayerSalaries();
 
     return res.status(200).json(playerData);
   } catch (err) {

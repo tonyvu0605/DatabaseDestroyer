@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeamSalaries } from 'reduxes/teamSalariesByYearSlice';
 
+import "./teamSalariesByYearView.scss"
+
 const TeamSalariesByYearView = () => {
   const dispatch = useDispatch();
   const { data: teamSalaries } = useSelector((state) => state.teamSalaries);
@@ -13,7 +15,7 @@ const TeamSalariesByYearView = () => {
   const headers = teamSalaries.length > 0 ? Object.keys(teamSalaries[0]) : [];
 
   return (
-    <div>
+    <div className="TeamSalariesByYearView">
       <h1>Team Salaries By Year</h1>
       <table>
         <thead>

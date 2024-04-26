@@ -13,9 +13,10 @@ export const fetchHighScoreGame = async () => {
 };
 
 export const fetchSeasonalPointsAverage = async () => {
-  const getLikesSQL = `SELECT player_name, SUM(salary) as total_salary
+  const getLikesSQL = `SELECT P.player_id AS player_id, player_name, SUM(salary) as total_salary
                          FROM Player_Salaries
-                         GROUP BY player_name
+                         JOIN Players P on P.player_id = Player_Salaries.player_id
+                         GROUP BY player_name, P.player_id
                          ORDER BY total_salary DESC;
     `;
 

@@ -9,6 +9,7 @@ import {
   Card,
   Table,
   Paper,
+  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -87,41 +88,57 @@ const TeamView = () => {
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
-                <TableRow>
+                <TableRow >
                   {headCells.map((headCell) => (
-                    <TableCell
-                      key={headCell.id}
-                      sortDirection={orderBy === headCell.id ? order : false}
-                    >
-                      <TableSortLabel
-                        active={orderBy === headCell.id}
-                        direction={orderBy === headCell.id ? order : 'asc'}
-                        onClick={createSortHandler(headCell.id)}
+                      <TableCell
+                          key={headCell.id}
+                          sortDirection={orderBy === headCell.id ? order : false}
                       >
-                        {headCell.label}
-                        {orderBy === headCell.id ? (
-                          <Box component="span" sx={visuallyHidden}>
-                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                          </Box>
-                        ) : null}
-                      </TableSortLabel>
-                    </TableCell>
+                        <TableSortLabel
+                            active={orderBy === headCell.id}
+                            direction={orderBy === headCell.id ? order : 'asc'}
+                            onClick={createSortHandler(headCell.id)}
+                        >
+                          {headCell.label}
+                          {orderBy === headCell.id ? (
+                              <Box component="span" sx={visuallyHidden}>
+                                {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                              </Box>
+                          ) : null}
+                        </TableSortLabel>
+                      </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
                 {teamData?.length > 0 ? (
-                  teamData.map((team) => (
-                    <TableRow key={team.team_id}>
-                      <TableCell>{team.team_name}</TableCell>
-                      <TableCell>{team.team_city}</TableCell>
-                      <TableCell>{team.team_year_founded}</TableCell>
-                      <TableCell>{team.state_province}</TableCell>
-                      <TableCell>{team.country}</TableCell>
-                      <TableCell>{team.arena_name}</TableCell>
-                      <TableCell>{team.team_headcoach}</TableCell>
-                      <TableCell>{team.team_owner}</TableCell>
-                    </TableRow>
+                  teamData.map((team, index) => (
+                      <TableRow
+                          key={index}
+                      >
+
+                        <TableCell
+                            className="TeamView__tableCell"
+                            sx={{ display: 'flex', alignItems: 'center' }}
+                        >
+                          <Avatar
+                              src={`https://cdn.nba.com/logos/nba/${team?.team_id}/primary/L/logo.svg`}
+                              alt="team logo"
+                              className="PlayerProfileView__cardMedia__teamLogo"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = null;
+                              }}
+                          />
+                        </TableCell>
+                        <TableCell className="TeamView__tableCell">{team.team_name}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.team_city}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.team_year_founded}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.state_province}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.country}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.arena_name}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.team_owner}</TableCell>
+                      </TableRow>
                   ))
                 ) : (
                   <TableRow>
