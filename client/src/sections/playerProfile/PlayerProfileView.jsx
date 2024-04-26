@@ -35,7 +35,7 @@ const PlayerProfileView = () => {
   }, [dispatch, playerId]);
 
   if (!playerData || !playerSalaryInfo) return null;
-
+  console.log(playerSalaryInfo);
   return (
     <Container maxWidth="lg" className="PlayerProfileView">
       <Card className="PlayerProfileView__card">
@@ -113,7 +113,10 @@ const PlayerProfileView = () => {
                   <TableCell component="th" scope="row">
                     {salaryInfo.year}
                   </TableCell>
-                  <TableCell align="right">{salaryInfo.salary}</TableCell>
+                  <TableCell align="right"> ${(salaryInfo.salary / 1000000).toLocaleString(undefined, {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1,
+                  })}m</TableCell>
                 </TableRow>
               ))}
             </TableBody>
