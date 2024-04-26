@@ -67,11 +67,11 @@ export const fetchTopPlayerSalaries = async () => {
 
 export const fetchAveragePlayerSalaries = async ({ searchQuery, orderBy, order }) => {
   const getLikesSQL = `
-  SELECT player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS average_salary, year
+  SELECT P.player_id AS player_id, player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS average_salary, year
   FROM Player_Salaries
   JOIN Players P on P.player_id = Player_Salaries.player_id
-  WHERE player_name LIKE ?
   GROUP BY player_name, year
+  WHERE player_name LIKE ?
   ORDER BY ${orderBy} ${order};  
   `;
 
