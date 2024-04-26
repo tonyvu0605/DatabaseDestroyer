@@ -9,8 +9,6 @@ export const fetchTeamById = async (team_id) => {
 };
 
 export const fetchTeams = async ({ searchQuery, limit, offset, orderBy, order }) => {
-
-
   const getTeamsSQL = `
       SELECT Teams.team_id AS team_id, team_city, team_name, team_year_founded, state_province, country, arena_name, team_headcoach, team_owner
       FROM Teams
