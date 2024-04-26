@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 
-import palette  from './palette';
+import palette from './palette';
 import overrides from './overrides';
 import { typography } from './typography';
 

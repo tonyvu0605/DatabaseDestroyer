@@ -4,7 +4,7 @@ import { fetchAveragePlayerSalaries } from 'reduxes/averagePlayerSalariesSlice';
 
 const AveragePlayerSalariesView = () => {
   const dispatch = useDispatch();
-  const { data: players } = useSelector(state => state.averagePlayerSalaries);
+  const { data: players } = useSelector((state) => state.averagePlayerSalaries);
 
   useEffect(() => {
     dispatch(fetchAveragePlayerSalaries());
@@ -18,7 +18,7 @@ const AveragePlayerSalariesView = () => {
       <table>
         <thead>
           <tr>
-            {headers.map(header => (
+            {headers.map((header) => (
               <th key={header}>{header}</th>
             ))}
           </tr>
@@ -26,7 +26,7 @@ const AveragePlayerSalariesView = () => {
         <tbody>
           {players.map((player, index) => (
             <tr key={index}>
-              {headers.map(header => (
+              {headers.map((header) => (
                 <td key={`${header}-${index}`}>{player[header]}</td>
               ))}
             </tr>
@@ -38,5 +38,3 @@ const AveragePlayerSalariesView = () => {
 };
 
 export default AveragePlayerSalariesView;
-
-

@@ -14,7 +14,8 @@
   table {
     width: 70%;
     border-collapse: collapse;
-    th, td {
+    th,
+    td {
       border: 1px solid #a69e9e;
       padding: 8px 16px;
       text-align: left;
@@ -25,10 +26,10 @@
       font-weight: bold;
     }
     tr:nth-child(odd) td {
-      background-color: #e9e7e7; 
+      background-color: #e9e7e7;
     }
     tr:hover {
-      background-color: #c0b7b7; 
+      background-color: #c0b7b7;
       cursor: pointer;
     }
   }

@@ -23,7 +23,7 @@ const LoginView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(loginUser({email, password}));
+    await dispatch(loginUser({ email, password }));
 
     if (!error) {
       navigate('/');
@@ -34,7 +34,11 @@ const LoginView = () => {
 
   return (
     <div className="login-view">
-      <img src="/assets/goldenHourBasketball.jpg" alt="Golden Hour Basketball" className="login-view__image" />
+      <img
+        src="/assets/goldenHourBasketball.jpg"
+        alt="Golden Hour Basketball"
+        className="login-view__image"
+      />
       <Container>
         <Box className="login-view__container">
           <Typography variant="h4" className="login-view__title">

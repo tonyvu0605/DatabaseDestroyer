@@ -19,7 +19,7 @@ const topPlayerSalariesSlice = createSlice({
   initialState: {
     data: [],
     loading: false,
-    error: null
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -35,7 +35,7 @@ const topPlayerSalariesSlice = createSlice({
         state.error = action.payload;
         state.loading = false;
       });
-  }
+  },
 });
 
 export default topPlayerSalariesSlice.reducer;

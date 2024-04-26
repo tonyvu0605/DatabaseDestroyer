@@ -8,20 +8,16 @@
   width: 100%;
   height: 100%;
 
-  &__card{
+  &__card {
     padding-top: 1rem;
     margin: 1rem;
   }
 
-  &__searchItems{
+  &__searchItems {
     margin-left: 1rem;
 
-
-    &__searchInput{
+    &__searchInput {
       width: 40%;
     }
-
   }
-
-
 }

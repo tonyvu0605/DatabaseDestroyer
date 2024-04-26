@@ -4,7 +4,7 @@ import { fetchHighScoringGame } from 'reduxes/highScoringGameSlice';
 
 const SeasonalPointsAverageView = () => {
   const dispatch = useDispatch();
-  const { data: highScoringGames } = useSelector(state => state.highScoringGame);
+  const { data: highScoringGames } = useSelector((state) => state.highScoringGame);
 
   useEffect(() => {
     dispatch(fetchHighScoringGame());
@@ -13,30 +13,28 @@ const SeasonalPointsAverageView = () => {
   const headers = highScoringGames.length > 0 ? Object.keys(highScoringGames[0]) : [];
 
   return (
-      <div>
-        <h1>High Scoring Game</h1>
-        <table>
-          <thead>
+    <div>
+      <h1>High Scoring Game</h1>
+      <table>
+        <thead>
           <tr>
-            {headers.map(header => (
-                <th key={header}>{header}</th>
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
             ))}
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           {highScoringGames.map((game, index) => (
-              <tr key={index}>
-                {headers.map(header => (
-                    <td key={`${header}-${index}`}>{game[header]}</td>
-                ))}
-              </tr>
+            <tr key={index}>
+              {headers.map((header) => (
+                <td key={`${header}-${index}`}>{game[header]}</td>
+              ))}
+            </tr>
           ))}
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
 export default SeasonalPointsAverageView;
-
-

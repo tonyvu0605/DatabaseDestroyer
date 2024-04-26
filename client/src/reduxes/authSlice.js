@@ -3,33 +3,33 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // ----------------------------------------------------------------------
 
-export const loginUser = createAsyncThunk('auth/loginUser', async ({ email, password }, { rejectWithValue }) => {
-  try {
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      if (!email || !password) {
+        return rejectWithValue('Please fill in all fields');
+      }
 
-    if (!email || !password){
-      return rejectWithValue('Please fill in all fields');
+      const response = await makeRequest.post(`/auth/login`, { email, password });
+
+      if (response.data.error) {
+        return rejectWithValue(response.data.error);
+      }
+
+      console.log(response.data.user);
+
+      return response.data.user;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
     }
-
-
-    const response = await makeRequest.post(`/auth/login`, { email, password });
-
-    if(response.data.error){
-      return rejectWithValue(response.data.error);
-    }
-
-    console.log(response.data.user);
-
-    return response.data.user;
-  } catch (err) {
-    return rejectWithValue(err.response.data);
   }
-});
+);
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async ({ email, password, confirmPassword }, { rejectWithValue }) => {
-
-    if (!email || !password || !confirmPassword){
+    if (!email || !password || !confirmPassword) {
       return rejectWithValue('Please fill in all fields');
     }
 
@@ -38,9 +38,13 @@ export const registerUser = createAsyncThunk(
     }
 
     try {
-      const response = await makeRequest.post(`/auth/register`, { email, password, confirmPassword });
+      const response = await makeRequest.post(`/auth/register`, {
+        email,
+        password,
+        confirmPassword,
+      });
 
-      if(response.data.error){
+      if (response.data.error) {
         return rejectWithValue(response.data.error);
       }
 
@@ -83,7 +87,7 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = `Login Error: ${action.payload}` ;
+        state.error = `Login Error: ${action.payload}`;
         state.loading = false;
       })
       .addCase(registerUser.pending, (state) => {
@@ -94,7 +98,7 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = `Register Error: ${action.payload}` ;
+        state.error = `Register Error: ${action.payload}`;
         state.loading = false;
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
@@ -108,9 +112,8 @@ const authSlice = createSlice({
         state.currentUser = {
           ...currentUserData,
           ...action.payload[0],
-        }
-      })
-
+        };
+      });
   },
 });
 

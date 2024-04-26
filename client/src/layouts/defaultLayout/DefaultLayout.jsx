@@ -7,16 +7,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import './defaultLayout.scss';
 
 const DefaultLayout = ({ children }) => (
-    <div className="default-layout">
-      <CssBaseline />
-      <NavBar />
+  <div className="defaultLayout">
+    <CssBaseline />
+    <NavBar />
 
-      <div className="default-layout__content">
-        <NavColumn/>
-        {children}
+    <div className="defaultLayout__content">
+      <div className='defaultLayout__content__navColumn'>
+        <NavColumn />
       </div>
+      {children}
     </div>
-  )
+  </div>
+);
 
 DefaultLayout.propTypes = {
   children: PropTypes.node,

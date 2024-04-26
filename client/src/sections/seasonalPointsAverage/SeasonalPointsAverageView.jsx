@@ -4,7 +4,7 @@ import { fetchSeasonalPointsAverage } from 'reduxes/seasonalPointsAverageSlice';
 
 const SeasonalPointsAverageView = () => {
   const dispatch = useDispatch();
-  const { data: seasonalPointsAverage } = useSelector(state => state.seasonalPointsAverage);
+  const { data: seasonalPointsAverage } = useSelector((state) => state.seasonalPointsAverage);
 
   useEffect(() => {
     dispatch(fetchSeasonalPointsAverage());
@@ -13,30 +13,28 @@ const SeasonalPointsAverageView = () => {
   const headers = seasonalPointsAverage.length > 0 ? Object.keys(seasonalPointsAverage[0]) : [];
 
   return (
-      <div>
-        <h1>Seasonal Points Average</h1>
-        <table>
-          <thead>
+    <div>
+      <h1>Seasonal Points Average</h1>
+      <table>
+        <thead>
           <tr>
-            {headers.map(header => (
-                <th key={header}>{header}</th>
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
             ))}
           </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
           {seasonalPointsAverage.map((average, index) => (
-              <tr key={index}>
-                {headers.map(header => (
-                    <td key={`${header}-${index}`}>{average[header]}</td>
-                ))}
-              </tr>
+            <tr key={index}>
+              {headers.map((header) => (
+                <td key={`${header}-${index}`}>{average[header]}</td>
+              ))}
+            </tr>
           ))}
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
 export default SeasonalPointsAverageView;
-
-

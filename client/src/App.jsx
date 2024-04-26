@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 import { debounce } from 'lodash';
 import ThemeProvider from 'themes';
 import Router from 'routes/sections';
@@ -6,7 +6,6 @@ import Router from 'routes/sections';
 // ----------------------------------------------------------------------
 
 export default function App() {
-
   // This useEffect allows for dynamic height changes and attempts
   // to fix the iOS safari height issue
   useEffect(() => {

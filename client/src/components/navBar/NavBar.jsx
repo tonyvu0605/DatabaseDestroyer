@@ -15,7 +15,8 @@ import {
   Toolbar,
   MenuItem,
   Typography,
-  IconButton, ListItemIcon,
+  IconButton,
+  ListItemIcon,
 } from '@mui/material';
 
 import './navBar.scss';
@@ -63,8 +64,16 @@ function NavBar() {
       <AppBar elevation={0}>
         <Toolbar className="Navbar__Container">
           <Button onClick={handleHomeClick} className="NavBar__Button">
-            <img src="/assets/ddLogoFavEdit.svg" className="NavBar__Button__Logo" alt="Database Destroyer Logo"/>
-            <Typography variant="h5" className="NavBar__Button__Title" sx={{color: 'text.primary'}}>
+            <img
+              src="/assets/ddLogoFavEdit.svg"
+              className="NavBar__Button__Logo"
+              alt="Database Destroyer Logo"
+            />
+            <Typography
+              variant="h5"
+              className="NavBar__Button__Title"
+              sx={{ color: 'text.primary' }}
+            >
               NBA Basketball Encyclopedia
             </Typography>
           </Button>
@@ -80,56 +89,56 @@ function NavBar() {
               )}
             </IconButton>
           </Tooltip>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleDarkModeClick}>
-                <ListItemIcon>
-                  {darkMode ? (
-                    <Iconify icon="tdesign:mode-light" />
-                  ) : (
-                    <Iconify icon="tdesign:mode-dark" />
-                  )}
-                </ListItemIcon>
-                <Typography textAlign="center">{darkMode ? 'Light Mode' : 'Dark Mode'}</Typography>
-              </MenuItem>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            <MenuItem onClick={handleDarkModeClick}>
+              <ListItemIcon>
+                {darkMode ? (
+                  <Iconify icon="tdesign:mode-light" />
+                ) : (
+                  <Iconify icon="tdesign:mode-dark" />
+                )}
+              </ListItemIcon>
+              <Typography textAlign="center">{darkMode ? 'Light Mode' : 'Dark Mode'}</Typography>
+            </MenuItem>
 
-              {currentUser ? (
-                <MenuItem onClick={handleLogoutClick}>
+            {currentUser ? (
+              <MenuItem onClick={handleLogoutClick}>
+                <ListItemIcon>
+                  <Iconify icon="material-symbols:logout" />
+                </ListItemIcon>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            ) : (
+              [
+                <MenuItem key="login" onClick={handleLoginClick}>
                   <ListItemIcon>
-                    <Iconify icon="material-symbols:logout" />
+                    <Iconify icon="material-symbols:login" />
                   </ListItemIcon>
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
-              ) : (
-                [
-                  <MenuItem key="login" onClick={handleLoginClick}>
-                    <ListItemIcon>
-                      <Iconify icon="material-symbols:login" />
-                    </ListItemIcon>
-                    <Typography textAlign="center">Login</Typography>
-                  </MenuItem>,
-                  <MenuItem key="register" onClick={handleRegisterClick}>
-                    <ListItemIcon>
-                      <Iconify icon="mdi:register" />
-                    </ListItemIcon>
-                    <Typography textAlign="center">Register</Typography>
-                  </MenuItem>,
-                ]
-              )}
-            </Menu>
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>,
+                <MenuItem key="register" onClick={handleRegisterClick}>
+                  <ListItemIcon>
+                    <Iconify icon="mdi:register" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">Register</Typography>
+                </MenuItem>,
+              ]
+            )}
+          </Menu>
         </Toolbar>
       </AppBar>
       <Toolbar />

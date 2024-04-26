@@ -1,4 +1,3 @@
-
 export function responsiveFontSizes({ sm, md, lg }) {
   return {
     fontSize: sm,
@@ -13,7 +12,6 @@ export function responsiveFontSizes({ sm, md, lg }) {
     },
   };
 }
-
 
 export const primaryFont = 'Montserrat, sans-serif';
 export const secondaryFont = 'Open Sans, sans-serif';
@@ -59,7 +57,7 @@ export const typography = {
     fontFamily: primaryFont,
     fontWeight: 700,
     lineHeight: 1.5,
-    ...responsiveFontSizes({ sm: '1rem', md: '1.25rem', lg: '1.25rem' })
+    ...responsiveFontSizes({ sm: '1rem', md: '1.25rem', lg: '1.25rem' }),
   },
   subtitle1: {
     fontFamily: secondaryFont,

@@ -72,71 +72,77 @@ const TeamView = () => {
   };
 
   return (
-      <div className="TeamView">
-        <Container maxWidth="lg">
-          <Card className="TeamView__card">
-            <div className="TeamView__searchItems">
-              <TextField
-                  label="Search Teams"
-                  variant="outlined"
-                  className="TeamView__searchItems__searchInput"
-                  onChange={handleSearchChange}
-              />
-            </div>
+    <div className="TeamView">
+      <Container maxWidth="lg">
+        <Card className="TeamView__card">
+          <div className="TeamView__searchItems">
+            <TextField
+              label="Search Teams"
+              variant="outlined"
+              className="TeamView__searchItems__searchInput"
+              onChange={handleSearchChange}
+            />
+          </div>
 
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {headCells.map((headCell) => (
-                        <TableCell
-                            key={headCell.id}
-                            sortDirection={orderBy === headCell.id ? order : false}
-                        >
-                          <TableSortLabel
-                              active={orderBy === headCell.id}
-                              direction={orderBy === headCell.id ? order : 'asc'}
-                              onClick={createSortHandler(headCell.id)}
-                          >
-                            {headCell.label}
-                            {orderBy === headCell.id ? (
-                                <Box component="span" sx={visuallyHidden}>
-                                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                </Box>
-                            ) : null}
-                          </TableSortLabel>
-                        </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {teamData.map((team) => (
-                      <TableRow key={team.team_id}>
-                        <TableCell>{team.team_name}</TableCell>
-                        <TableCell>{team.team_city}</TableCell>
-                        <TableCell>{team.team_year_founded}</TableCell>
-                        <TableCell>{team.state_province}</TableCell>
-                        <TableCell>{team.country}</TableCell>
-                        <TableCell>{team.arena_name}</TableCell>
-                        <TableCell>{team.team_headcoach}</TableCell>
-                        <TableCell>{team.team_owner}</TableCell>
-                      </TableRow>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headCells.map((headCell) => (
+                    <TableCell
+                      key={headCell.id}
+                      sortDirection={orderBy === headCell.id ? order : false}
+                    >
+                      <TableSortLabel
+                        active={orderBy === headCell.id}
+                        direction={orderBy === headCell.id ? order : 'asc'}
+                        onClick={createSortHandler(headCell.id)}
+                      >
+                        {headCell.label}
+                        {orderBy === headCell.id ? (
+                          <Box component="span" sx={visuallyHidden}>
+                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                          </Box>
+                        ) : null}
+                      </TableSortLabel>
+                    </TableCell>
                   ))}
-                </TableBody>
-              </Table>
-              <TablePagination
-                  rowsPerPageOptions={[5, 10, 25]}
-                  component="div"
-                  count={totalCount}
-                  rowsPerPage={limit}
-                  page={offset / limit}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </TableContainer>
-          </Card>
-        </Container>
-      </div>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {teamData?.length > 0 ? (
+                  teamData.map((team) => (
+                    <TableRow key={team.team_id}>
+                      <TableCell>{team.team_name}</TableCell>
+                      <TableCell>{team.team_city}</TableCell>
+                      <TableCell>{team.team_year_founded}</TableCell>
+                      <TableCell>{team.state_province}</TableCell>
+                      <TableCell>{team.country}</TableCell>
+                      <TableCell>{team.arena_name}</TableCell>
+                      <TableCell>{team.team_headcoach}</TableCell>
+                      <TableCell>{team.team_owner}</TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={5}>Team not found</TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={totalCount}
+              rowsPerPage={limit}
+              page={offset / limit}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </Card>
+      </Container>
+    </div>
   );
 };
 

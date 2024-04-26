@@ -3,25 +3,32 @@
 .PlayerView {
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
   width: 100%;
   height: 100%;
 
-  &__card{
+  &__card {
     padding-top: 1rem;
     margin: 1rem;
   }
 
-  &__searchItems{
-    margin-left: 1rem;
+  &__tableCell {
+    display: flex;
+    align-items: start;
+    flex-direction: row;
 
-
-    &__searchInput{
-      width: 40%;
+    &__avatar {
+      width: 2rem !important;
+      height: 2rem !important;
+      margin-right: 0.5rem;
     }
-
   }
 
+  &__searchItems {
+    margin-left: 1rem;
 
+    &__searchInput {
+      width: 40%;
+    }
+  }
 }

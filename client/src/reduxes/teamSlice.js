@@ -4,16 +4,18 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Async thunks
 export const fetchTeams = createAsyncThunk(
   'team/fetchTeam',
-  async ({searchQuery, limit, offset, orderBy, order}, { rejectWithValue }) => {
+  async ({ searchQuery, limit, offset, orderBy, order }, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get(`/team/search?searchQuery=${searchQuery}&offset=${offset}&limit=${limit}&orderBy=${orderBy}&order=${order}`);
+      const response = await makeRequest.get(
+        `/team/search?searchQuery=${searchQuery}&offset=${offset}&limit=${limit}&orderBy=${orderBy}&order=${order}`
+      );
 
       return response.data;
     } catch (err) {
       console.log(err);
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  },
+  }
 );
 
 export const fetchTeamById = createAsyncThunk(
@@ -25,7 +27,7 @@ export const fetchTeamById = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  },
+  }
 );
 
 export const fetch10Teams = createAsyncThunk(
@@ -37,7 +39,7 @@ export const fetch10Teams = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  },
+  }
 );
 
 const initialState = {

@@ -25,8 +25,6 @@ const LandingView = () => {
 
   console.log(playerData);
 
-
-
   return (
     <div className="Landing">
       <TableContainer component={Paper}>

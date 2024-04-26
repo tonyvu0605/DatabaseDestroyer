@@ -15,9 +15,9 @@ import authReducer from './authSlice';
 import teamReducer from './teamSlice';
 import playerReducer from './playerSlice';
 import darkModeReducer from './darkModeSlice';
-import teamPerformanceReducer from './teamPerformanceSlice'
-import teamSalariesReducer from './teamSalariesByYearSlice'
-import highScoringGameReducer from './highScoringGameSlice'
+import teamPerformanceReducer from './teamPerformanceSlice';
+import teamSalariesReducer from './teamSalariesByYearSlice';
+import highScoringGameReducer from './highScoringGameSlice';
 import topPlayerSalariesReducer from './topPlayerSalariesSlice';
 import averagePlayerSalariesReducer from './averagePlayerSalariesSlice';
 import seasonalPointsAverageReducer from './seasonalPointsAverageSlice';

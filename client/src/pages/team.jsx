@@ -5,13 +5,13 @@ import { TeamView } from 'src/sections';
 // ----------------------------------------------------------------------
 
 export default function TeamPage() {
-    return (
-        <>
-            <Helmet>
-                <title> Team </title>
-            </Helmet>
+  return (
+    <>
+      <Helmet>
+        <title> Team </title>
+      </Helmet>
 
-            <TeamView />
-        </>
-    );
+      <TeamView />
+    </>
+  );
 }

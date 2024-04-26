@@ -8,9 +8,9 @@ import { visuallyHidden } from '@mui/utils';
 import {
   Box,
   Card,
-  Link,
   Table,
   Paper,
+  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -71,7 +71,6 @@ const PlayerView = () => {
     setOffset(0);
   };
 
-
   return (
     <div className="PlayerView">
       <Container maxWidth="lg">
@@ -115,15 +114,30 @@ const PlayerView = () => {
                   playerData.map((player) => (
                     <TableRow
                       key={player.player_id}
-                      component={Link}
                       onClick={() => navigate(`/player/${player.player_id}`)}
                       sx={{ cursor: 'pointer' }}
                     >
-                      <TableCell>{player.player_name}</TableCell>
-                      <TableCell>{new Date(player.birthdate).toLocaleDateString()}</TableCell>
-                      <TableCell>{player.school}</TableCell>
-                      <TableCell>{player.height_inch}</TableCell>
-                      <TableCell>{player.weight_lbs}</TableCell>
+                      <TableCell
+                        className="PlayerView__tableCell"
+                        sx={{ display: 'flex', alignItems: 'center' }}
+                      >
+                        <Avatar
+                          src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${player.player_id}.png`}
+                          alt="Player"
+                          className="PlayerView__tableCell__avatar"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = '/assets/nullPlayer.png';
+                          }}
+                        />
+                        {player.player_name}
+                      </TableCell>
+                      <TableCell className="PlayerView__tableCell">
+                        {new Date(player.birthdate).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="PlayerView__tableCell">{player.school}</TableCell>
+                      <TableCell className="PlayerView__tableCell">{player.height_inch}</TableCell>
+                      <TableCell className="PlayerView__tableCell">{player.weight_lbs}</TableCell>
                     </TableRow>
                   ))
                 ) : (

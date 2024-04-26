@@ -24,7 +24,7 @@ const RegisterView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(registerUser({email, password, confirmPassword}));
+    await dispatch(registerUser({ email, password, confirmPassword }));
 
     if (!error) {
       navigate('/login');
@@ -33,7 +33,11 @@ const RegisterView = () => {
 
   return (
     <div className="register-view">
-      <img src="/assets/goldenHourBasketball.jpg" alt="Golden Hour Basketball" className="register-view__image" />
+      <img
+        src="/assets/goldenHourBasketball.jpg"
+        alt="Golden Hour Basketball"
+        className="register-view__image"
+      />
       <Container>
         <Box className="register-view__container">
           <Typography variant="h4" className="register-view__title">
@@ -80,7 +84,6 @@ const RegisterView = () => {
           </Link>
 
           <CustomAlert sx={{ padding: 1 }} error={error} severity="error" />
-
         </Box>
       </Container>
     </div>

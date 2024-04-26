@@ -10,7 +10,7 @@
     max-height: calc(100vh - 4.3rem);
     object-fit: cover;
 
-    @include mediaDown('lg'){
+    @include mediaDown('lg') {
       display: none;
     }
   }
@@ -46,7 +46,7 @@
     }
   }
 
-  &__divider{
+  &__divider {
     width: 50%;
     margin-top: 1rem;
     margin-bottom: 1rem;

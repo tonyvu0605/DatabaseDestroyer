@@ -6,13 +6,15 @@ export const fetchPlayers = createAsyncThunk(
   'players/fetchPlayer',
   async ({ searchQuery, limit, offset, orderBy, order }, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get(`/player/search?searchQuery=${searchQuery}&offset=${offset}&limit=${limit}&orderBy=${orderBy}&order=${order}`);
+      const response = await makeRequest.get(
+        `/player/search?searchQuery=${searchQuery}&offset=${offset}&limit=${limit}&orderBy=${orderBy}&order=${order}`
+      );
 
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  },
+  }
 );
 
 export const fetchPlayerById = createAsyncThunk(
@@ -25,7 +27,7 @@ export const fetchPlayerById = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  },
+  }
 );
 
 export const fetch10Players = createAsyncThunk(
@@ -37,7 +39,7 @@ export const fetch10Players = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
-  },
+  }
 );
 
 const initialState = {
