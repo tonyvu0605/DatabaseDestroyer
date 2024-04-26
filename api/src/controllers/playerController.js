@@ -58,12 +58,15 @@ export const getTopPlayerSalaries = async (req, res, next) => {
 
 export const getPlayerSalariesByYear = async (req, res, next) => {
   try {
-    let { searchQuery, orderBy, order } = req.query;
+    let { searchQuery, limit, offset, orderBy, order } = req.query;
+
     searchQuery = searchQuery ? `%${searchQuery.trim()}%` : '%%';
+    limit = parseInt(limit, 10) || 5;
+    offset = parseInt(offset, 10) || 0;
     orderBy = orderBy ? `${orderBy.trim()}` : 'player_name';
     order = order ? `${order.trim()}` : 'ASC';
 
-    const playerData = await fetchPlayerSalaries({ searchQuery, orderBy, order });
+    const playerData = await fetchPlayerSalaries({ searchQuery, limit, offset, orderBy, order });
 
     return res.status(200).json(playerData);
   } catch (err) {

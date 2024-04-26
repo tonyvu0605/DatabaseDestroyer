@@ -65,17 +65,36 @@ export const fetchTopPlayerSalaries = async () => {
   return executeQuery(getLikesSQL, []);
 };
 
-export const fetchPlayerSalaries = async ({ searchQuery, orderBy, order }) => {
+export const fetchPlayerSalaries = async ({ searchQuery, limit, offset, orderBy, order }) => {
   const getLikesSQL = `
-  SELECT player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS salary, year
+
+  SELECT P.player_id, player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS salary, year
   FROM Player_Salaries
   JOIN Players P on P.player_id = Player_Salaries.player_id
   WHERE player_name LIKE ?
-  GROUP BY player_name, year
-  ORDER BY ${orderBy} ${order};  
+  GROUP BY P.player_id, player_name, year
+  ORDER BY ${orderBy} ${order}
+  LIMIT ? OFFSET ?;
   `;
 
-  return executeQuery(getLikesSQL, [searchQuery]);
+  const getCountSQL = `
+      SELECT COUNT(DISTINCT P.player_id) AS total
+      FROM Player_Salaries
+               JOIN Players P ON P.player_id = Player_Salaries.player_id
+      WHERE player_name LIKE ?;
+  `;
+
+  const [playersSalary, countResult] = await Promise.all([
+    executeQuery(getLikesSQL, [searchQuery, limit, offset]),
+    executeQuery(getCountSQL, [searchQuery]),
+  ]);
+
+  const totalCount = countResult[0].total;
+
+  return {
+    playersSalary,
+    totalCount,
+  };
 };
 
 export const fetchSalariesWithAvgsById = async (player_id) => {

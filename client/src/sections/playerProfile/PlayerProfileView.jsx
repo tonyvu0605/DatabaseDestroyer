@@ -27,7 +27,7 @@ const PlayerProfileView = () => {
   const playerId = parseInt(useLocation().pathname.split('/')[2], 10);
 
   const [playerData] = useSelector((state) => state.player.playerData);
-  const playerSalaryInfo = useSelector((state) => state.averagePlayerSalaries.data);
+  const playerSalaryInfo = useSelector((state) => state.playerSalaries.data);
 
   useEffect(() => {
     dispatch(fetchPlayerById(playerId));

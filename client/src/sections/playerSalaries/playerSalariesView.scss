@@ -1,6 +1,6 @@
 @import 'themes/global.scss';
 
-.AveragePlayerSalariesView {
+.PlayerSalariesView {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,15 +14,22 @@
   }
 
   &__tableCell {
-    display: flex;
-    align-items: start;
-    flex-direction: row;
+    padding: 0.5rem;
+  }
 
-    &__avatar {
-      width: 2rem !important;
-      height: 2rem !important;
-      margin-right: 0.5rem;
-    }
+  &__playerInfo {
+    display: flex;
+    align-items: center;
+  }
+
+  &__playerName {
+    font-weight: bold;
+    margin-left: 0.5rem;
+  }
+
+  &__tableCell__avatar {
+    width: 2rem !important;
+    height: 2rem !important;
   }
 
   &__searchItems {
@@ -33,6 +40,3 @@
     }
   }
 }
-
-
-
