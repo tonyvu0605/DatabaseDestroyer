@@ -72,6 +72,8 @@ const TeamView = () => {
     setOffset(0);
   };
 
+  console.log(teamData);
+
   return (
     <div className="TeamView">
       <Container maxWidth="lg">
@@ -137,6 +139,7 @@ const TeamView = () => {
                         <TableCell className="TeamView__tableCell">{team.state_province}</TableCell>
                         <TableCell className="TeamView__tableCell">{team.country}</TableCell>
                         <TableCell className="TeamView__tableCell">{team.arena_name}</TableCell>
+                        <TableCell className="TeamView__tableCell">{team.team_headcoach}</TableCell>
                         <TableCell className="TeamView__tableCell">{team.team_owner}</TableCell>
                       </TableRow>
                   ))
