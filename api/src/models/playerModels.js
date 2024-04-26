@@ -12,24 +12,21 @@ export const fetchPlayerById = async (player_id) => {
 
 export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order }) => {
   const getPlayersSQL = `
-      WITH AvgSalaries AS (
-          SELECT player_id, AVG(salary) AS avg_salary
-          FROM Player_Salaries
-          GROUP BY player_id
-      )
+      WITH AvgSalaries AS (SELECT player_id, AVG(salary) AS avg_salary
+                           FROM Player_Salaries
+                           GROUP BY player_id)
       SELECT p.*, COALESCE(CAST(avg.avg_salary AS SIGNED), 0) AS avg_salary
       FROM Players p
-      LEFT JOIN AvgSalaries avg ON p.player_id = avg.player_id
+               LEFT JOIN AvgSalaries avg ON p.player_id = avg.player_id
       WHERE p.player_name LIKE ?
       ORDER BY ${orderBy} ${order}
-      LIMIT ?
-          OFFSET ?;
+      LIMIT ? OFFSET ?;
   `;
 
   const getCountSQL = `
-    SELECT COUNT(*) AS total
-    FROM Players
-    WHERE player_name LIKE ?;
+      SELECT COUNT(*) AS total
+      FROM Players
+      WHERE player_name LIKE ?;
   `;
 
   const [players, countResult] = await Promise.all([
@@ -66,15 +63,20 @@ export const fetchTopPlayerSalaries = async () => {
 };
 
 export const fetchPlayerSalaries = async ({ searchQuery, limit, offset, orderBy, order }) => {
-  const getLikesSQL = `
-
-  SELECT P.player_id, player_name, CONCAT('$',FORMAT(AVG(salary),2)) AS salary, year
-  FROM Player_Salaries
-  JOIN Players P on P.player_id = Player_Salaries.player_id
-  WHERE player_name LIKE ?
-  GROUP BY P.player_id, player_name, year
-  ORDER BY ${orderBy} ${order}
-  LIMIT ? OFFSET ?;
+  const getPlayerSalariesSQL = `
+      SELECT P.player_id, P.player_name, CONCAT('$', FORMAT(salary, 2)) AS salary, year
+      FROM (
+               SELECT P2.player_id
+               FROM Player_Salaries ps
+                        JOIN Players P2 ON P2.player_id = ps.player_id
+               WHERE P2.player_name LIKE ?
+               GROUP BY P2.player_id
+               ORDER BY ${orderBy} ${order}
+               LIMIT ? OFFSET ?
+           ) AS selected_players
+               JOIN Player_Salaries PS ON PS.player_id = selected_players.player_id
+               JOIN Players P ON P.player_id = selected_players.player_id
+      ORDER BY ${orderBy} ${order}, year;
   `;
 
   const getCountSQL = `
@@ -85,7 +87,7 @@ export const fetchPlayerSalaries = async ({ searchQuery, limit, offset, orderBy,
   `;
 
   const [playersSalary, countResult] = await Promise.all([
-    executeQuery(getLikesSQL, [searchQuery, limit, offset]),
+    executeQuery(getPlayerSalariesSQL, [searchQuery, limit, offset]),
     executeQuery(getCountSQL, [searchQuery]),
   ]);
 

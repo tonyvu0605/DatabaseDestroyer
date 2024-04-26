@@ -17,7 +17,7 @@ import {
   TextField,
   Container,
   TableContainer,
-  TableSortLabel,
+  TableSortLabel, TablePagination,
 } from '@mui/material';
 
 import './teamPerformanceView.scss';
@@ -32,14 +32,16 @@ const headCells = [
 
 const TeamPerformanceView = () => {
   const dispatch = useDispatch();
-  const { data: teamPerformancesData } = useSelector((state) => state.teamPerformance);
+  const { data: teamPerformancesData, totalCount } = useSelector((state) => state.teamPerformance);
   const [searchQuery, setSearchQuery] = useState('');
+  const [limit, setLimit] = useState(5);
+  const [offset, setOffset] = useState(0);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('season');
 
   useEffect(() => {
-    dispatch(fetchTeamPerformance({searchQuery, orderBy, order}));
-  }, [dispatch, order, orderBy, searchQuery]);
+    dispatch(fetchTeamPerformance({ searchQuery, limit, offset, orderBy, order }));
+  }, [dispatch, searchQuery, limit, offset, order, orderBy]);
 
 
   const handleSearchChange = debounce((event) => {
@@ -54,6 +56,15 @@ const TeamPerformanceView = () => {
 
   const createSortHandler = (property) => (event) => {
     handleRequestSort(event, property);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setOffset(newPage * limit);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setLimit(parseInt(event.target.value, 10));
+    setOffset(0);
   };
 
   return (
@@ -124,11 +135,20 @@ const TeamPerformanceView = () => {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={5}>No players found</TableCell>
+                    <TableCell colSpan={5}>No team found</TableCell>
                   </TableRow>
                 )}
               </TableBody>
             </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={totalCount}
+              rowsPerPage={limit}
+              page={offset / limit}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </TableContainer>
         </Card>
       </Container>

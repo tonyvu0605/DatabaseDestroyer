@@ -72,8 +72,6 @@ const TeamView = () => {
     setOffset(0);
   };
 
-  console.log(teamData);
-
   return (
     <div className="TeamView">
       <Container maxWidth="lg">

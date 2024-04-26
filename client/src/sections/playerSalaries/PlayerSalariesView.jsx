@@ -1,7 +1,9 @@
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchPlayerSalariesByYear } from 'reduxes/PlayerSalariesSlice';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
+
+import { visuallyHidden } from '@mui/utils';
 import {
   Box,
   Card,
@@ -18,7 +20,7 @@ import {
   TableSortLabel,
   TablePagination,
 } from '@mui/material';
-import { visuallyHidden } from '@mui/utils';
+
 import './playerSalariesView.scss';
 
 const headCells = [
@@ -31,7 +33,7 @@ const PlayerSalariesView = () => {
   const dispatch = useDispatch();
   const { data: players, totalCount } = useSelector((state) => state.playerSalaries);
   const [searchQuery, setSearchQuery] = useState('');
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(2);
   const [offset, setOffset] = useState(0);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('player_name');
@@ -157,7 +159,7 @@ const PlayerSalariesView = () => {
                   return (
                     <React.Fragment key={playerId}>
                       <TableRow>
-                        <TableCell colSpan={3} className="PlayerSalariesView__tableCell">
+                        <TableCell colSpan={3} className="PlayerSalariesView__tableCell" sx={{paddingBottom: 0}}>
                           <div className="PlayerSalariesView__playerInfo">
                             <Avatar
                               src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
@@ -184,7 +186,7 @@ const PlayerSalariesView = () => {
               </TableBody>
             </Table>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[2, 5, 10, 25]}
               component="div"
               count={totalCount}
               rowsPerPage={limit}

@@ -46,7 +46,15 @@ export const get10Teams = async (req, res, next) => {
 
 export const getTeamSalariesByYear = async (req, res, next) => {
   try {
-    const teamData = await fetchTeamSalariesByYear();
+    let { searchQuery, limit, offset, orderBy, order } = req.query;
+
+    searchQuery = searchQuery ? `%${searchQuery.trim()}%` : '%%';
+    limit = parseInt(limit, 10) || 5;
+    offset = parseInt(offset, 10) || 0;
+    orderBy = orderBy ? `${orderBy.trim()}` : 'year';
+    order = order ? `${order.trim()}` : 'DESC';
+
+    const teamData = await fetchTeamSalariesByYear({ searchQuery, limit, offset, orderBy, order });
     return res.status(200).json(teamData);
   } catch (err) {
     next(err);
@@ -54,13 +62,16 @@ export const getTeamSalariesByYear = async (req, res, next) => {
 };
 
 export const getTeamPerformance = async (req, res, next) => {
-  let { searchQuery, orderBy, order } = req.query;
+  let { searchQuery, limit, offset, orderBy, order } = req.query;
+
   searchQuery = searchQuery ? `%${searchQuery.trim()}%` : '%%';
+  limit = parseInt(limit, 10) || 5;
+  offset = parseInt(offset, 10) || 0;
   orderBy = orderBy ? `${orderBy.trim()}` : 'season';
   order = order ? `${order.trim()}` : 'ASC';
 
   try {
-    const teamData = await fetchTeamPerformance({ searchQuery, orderBy, order });
+    const teamData = await fetchTeamPerformance({ searchQuery, limit, offset, orderBy, order });
     return res.status(200).json(teamData);
   } catch (err) {
     next(err);

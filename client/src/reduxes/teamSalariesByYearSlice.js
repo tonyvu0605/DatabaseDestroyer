@@ -3,9 +3,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchTeamSalaries = createAsyncThunk(
   'team/fetchTeamSalaries',
-  async (_, { rejectWithValue }) => {
+  async ({ searchQuery, limit, offset, orderBy, order }, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get('/team/salaries');
+      const response = await makeRequest.get(`/team/salaries?searchQuery=${searchQuery}&offset=${offset}&limit=${limit}&orderBy=${orderBy}&order=${order}`);
+
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
@@ -17,6 +18,7 @@ const teamSalariesSlice = createSlice({
   name: 'teamSalaries',
   initialState: {
     data: [],
+    totalCount: 0,
     loading: false,
     error: null,
   },
@@ -27,7 +29,9 @@ const teamSalariesSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchTeamSalaries.fulfilled, (state, action) => {
-        state.data = action.payload;
+        console.log(action.payload);
+        state.data = action.payload.teamSalaries;
+        state.totalCount = action.payload.totalCount;
         state.loading = false;
       })
       .addCase(fetchTeamSalaries.rejected, (state, action) => {
