@@ -1,7 +1,31 @@
 @import 'themes/global.scss';
 
-.Landing {
-  .featured {
-    height: 100%;
+.LandingView {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__featuresSection{
+    display: flex;
+    flex-direction: column;
+
+
+    &__featureCardMedia{
+      height: 5rem;
+      width: 100%;
+    }
+    &__featureCard{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__cardContent{
+      flex: 1;
+
+    }
+
   }
 }
