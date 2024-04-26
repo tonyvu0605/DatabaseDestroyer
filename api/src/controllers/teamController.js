@@ -54,8 +54,13 @@ export const getTeamSalariesByYear = async (req, res, next) => {
 };
 
 export const getTeamPerformance = async (req, res, next) => {
+  let { searchQuery, orderBy, order } = req.query;
+  searchQuery = searchQuery ? `%${searchQuery.trim()}%` : '%%';
+  orderBy = orderBy ? `${orderBy.trim()}` : 'season';
+  order = order ? `${order.trim()}` : 'ASC';
+
   try {
-    const teamData = await fetchTeamPerformance(req.query.name);
+    const teamData = await fetchTeamPerformance({ searchQuery, orderBy, order });
     return res.status(200).json(teamData);
   } catch (err) {
     next(err);

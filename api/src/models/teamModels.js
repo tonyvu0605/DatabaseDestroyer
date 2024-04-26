@@ -13,7 +13,7 @@ export const fetchTeams = async ({ searchQuery, limit, offset, orderBy, order })
       SELECT *
       FROM Teams
       WHERE team_name LIKE ?
-      ORDER BY ? ?
+      ORDER BY ${orderBy} ${order}
       LIMIT ?
           OFFSET ?;
   `;
@@ -62,33 +62,32 @@ export const fetchTeamSalariesByYear = async (year) => {
   return executeQuery(getLikesSQL, [year]);
 };
 
-export const fetchTeamPerformance = async (name) => {
-  const getLikesSQL = `With cte1 as (
-            Select Games.season,
-                   CASE
-                       WHEN Games.home_team_id = Teams.team_id AND Games.team_won = ‘home’ then ‘win’
-                       WHEN Games.home_team_id = Teams.team_id AND Games.team_won = ‘visitor’ then ‘loss’
-                       END AS result
-            FROM Games
-                     INNER JOIN Teams on Games.home_team_id = Teams.team_id
-            WHERE Teams.team_name = ?
-            UNION ALL
-            Select Games.season,
-                   CASE
-                       WHEN Games.away_team_id = Teams.team_id AND Games.team_won = ‘home’ then ‘loss’
-                       WHEN Games.away_team_id = Teams.team_id AND Games.team_won = ‘visitor’ then ‘win’
-                       END AS result
-            FROM Games
-                     INNER JOIN Teams on Games.away_team_id = Teams.team_id
-            WHERE Teams.team_name = ?,
-          cte2 as (
-              SELECT season, SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) AS wins, SUM(CASE WHEN result = 'loss' THEN 1 ELSE 0 END) AS losses
-              FROM cte1
-              GROUP BY season)
-         SELECT season, wins, losses, round(wins/(wins + losses), 2) as win_percentage
-         FROM cte2
-         ORDER BY season
+export const fetchTeamPerformance = async ({ searchQuery, orderBy, order }) => {
+  const getLikesSQL = `WITH cte1 AS (
+      SELECT Games.season, Teams.team_id,
+             CASE
+                 WHEN Games.home_team_id = Teams.team_id AND Games.team_won = 'home' THEN 'win'
+                 WHEN Games.home_team_id = Teams.team_id AND Games.team_won = 'visitor' THEN 'loss'
+                 WHEN Games.visitor_team_id = Teams.team_id AND Games.team_won = 'home' THEN 'loss'
+                 WHEN Games.visitor_team_id = Teams.team_id AND Games.team_won = 'visitor' THEN 'win'
+                 END AS result
+      FROM Games
+               INNER JOIN Teams ON (Games.home_team_id = Teams.team_id OR Games.visitor_team_id = Teams.team_id)
+  ),
+                            cte2 AS (
+                                SELECT season, team_id,
+                                       SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) AS wins,
+                                       SUM(CASE WHEN result = 'loss' THEN 1 ELSE 0 END) AS losses
+                                FROM cte1
+                                GROUP BY season, team_id
+                            )
+                       SELECT c.season, t.team_name, c.team_id, c.wins, c.losses,
+                              ROUND(CAST(wins AS DECIMAL) / NULLIF(wins + losses, 0), 2) AS win_percentage
+                       FROM cte2 c
+                       JOIN Teams t ON c.team_id = t.team_id
+                       WHERE t.team_name LIKE ?
+                       ORDER BY ${orderBy} ${order}
         `;
 
-  return executeQuery(getLikesSQL, [name]);
+  return executeQuery(getLikesSQL, [searchQuery]);
 };

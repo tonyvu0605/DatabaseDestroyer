@@ -5,7 +5,7 @@ import errorHandler from '../middlewares/errorHandler.js';
 
 const router = express.Router();
 
-router.get('/high_score_game', getHighScoreGame);
+router.get('/high_score', getHighScoreGame);
 router.get('/seasonal_points_average', getSeasonalPointsAverage);
 router.use(errorHandler);
 

@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get('/team-id', verifyToken, getTeamById);
 router.get('/random_team', get10Teams);
-router.get('/search_team', searchTeams);
+router.get('/search', searchTeams);
 router.get('/salaries', getTeamSalariesByYear);
 router.get('/performance', getTeamPerformance);
 router.use(errorHandler);
