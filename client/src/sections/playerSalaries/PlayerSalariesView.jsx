@@ -44,13 +44,9 @@ const PlayerSalariesView = () => {
     fetchData();
   }, [fetchData]);
 
-  const handleSearchChange = useCallback(
-    debounce((event) => {
-      setSearchQuery(event.target.value);
-      setOffset(0);
-    }, 300),
-    []
-  );
+  const handleSearchChange = debounce((event) => {
+    setSearchQuery(event.target.value);
+  }, 300);
 
   const handleRequestSort = useCallback((event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -83,11 +79,34 @@ const PlayerSalariesView = () => {
     [players]
   );
 
-  const getPlayerInitials = useCallback((playerName) => {
-    const names = playerName.split(' ');
-    const initials = names.map((name) => name.charAt(0)).join('');
-    return initials.toUpperCase();
-  }, []);
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+  }
 
   return (
     <div className="PlayerSalariesView">
@@ -146,7 +165,7 @@ const PlayerSalariesView = () => {
                               className="PlayerSalariesView__tableCell__avatar"
                               loading="lazy"
                             >
-                              {getPlayerInitials(playerName)}
+                              <Avatar {...stringAvatar(`${playerName}`)} />
                             </Avatar>
                             <span className="PlayerSalariesView__playerName">{playerName}</span>
                           </div>
