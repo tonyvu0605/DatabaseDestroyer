@@ -29,7 +29,6 @@ const teamSalariesSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchTeamSalaries.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.data = action.payload.teamSalaries;
         state.totalCount = action.payload.totalCount;
         state.loading = false;

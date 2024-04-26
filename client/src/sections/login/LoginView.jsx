@@ -30,7 +30,7 @@ const LoginView = () => {
     }
   };
 
-  console.log(error);
+
 
   return (
     <div className="login-view">

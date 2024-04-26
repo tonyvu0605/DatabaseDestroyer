@@ -35,7 +35,7 @@ const PlayerProfileView = () => {
   }, [dispatch, playerId]);
 
   if (!playerData || !playerSalaryInfo) return null;
-  console.log(playerSalaryInfo);
+
   return (
     <Container maxWidth="lg" className="PlayerProfileView">
       <Card className="PlayerProfileView__card">

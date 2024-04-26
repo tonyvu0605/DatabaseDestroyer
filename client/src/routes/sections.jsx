@@ -3,6 +3,9 @@ import DefaultLayout from 'layouts/defaultLayout';
 import NullUserLayout from 'layouts/nullUserLayout';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
+import ProtectedRoute from './ProtectedRoute';
+import { useSelector } from 'react-redux';
+
 // ----------------------------------------------------------------------
 
 export const LandingPage = lazy(() => import('pages/landing'));
@@ -20,12 +23,15 @@ export const HighScoringGamePage = lazy(() => import('pages/highScoringGame'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
+
   return useRoutes([
     {
       element: (
-        <DefaultLayout>
-          <Outlet />
-        </DefaultLayout>
+        <ProtectedRoute>
+          <DefaultLayout>
+            <Outlet />
+          </DefaultLayout>
+        </ProtectedRoute>
       ),
       children: [
         { element: <LandingPage />, index: true },

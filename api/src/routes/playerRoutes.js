@@ -14,11 +14,11 @@ import verifyToken from '../middlewares/verifyToken.js';
 const router = express.Router();
 
 router.get('/profile/:player_id', verifyToken, getPlayerById);
-router.get('/random', get10Players);
-router.get('/search', searchPlayers);
-router.get('/top_salaries', getTopPlayerSalaries);
-router.get('/average_salaries', getPlayerSalariesByYear);
-router.get('/player_salaries', getPlayerSalariesInfo);
+router.get('/random', verifyToken, get10Players);
+router.get('/search', verifyToken, searchPlayers);
+router.get('/top_salaries', verifyToken, getTopPlayerSalaries);
+router.get('/average_salaries', verifyToken, getPlayerSalariesByYear);
+router.get('/player_salaries', verifyToken, getPlayerSalariesInfo);
 
 router.use(errorHandler);
 
