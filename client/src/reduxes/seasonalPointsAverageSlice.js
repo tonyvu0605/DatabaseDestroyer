@@ -3,9 +3,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchSeasonalPointsAverage = createAsyncThunk(
   'team/fetchSeasonalPointsAverage',
-  async (_, { rejectWithValue }) => {
+  async ({ searchQuery, orderBy, order }, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get('/game/seasonal_points_average');
+      const response = await makeRequest.get(`/game/seasonal_points_average?searchQuery=${searchQuery}&orderBy=${orderBy}&order=${order}`);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');

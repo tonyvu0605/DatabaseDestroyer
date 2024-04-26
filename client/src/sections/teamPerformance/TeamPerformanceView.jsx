@@ -23,8 +23,8 @@ import {
 import './teamPerformanceView.scss';
 
 const headCells = [
-  { id: 'season', label: 'Season' },
   { id: 'team_name', label: 'Team' },
+  { id: 'season', label: 'Season' },
   { id: 'wins', label: 'Wins' },
   { id: 'losses', label: 'Losses' },
   { id: 'win_percentage', label: 'Win Rate' },
