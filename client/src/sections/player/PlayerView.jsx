@@ -30,6 +30,7 @@ const headCells = [
   { id: 'school', label: 'School' },
   { id: 'height_inch', label: 'Height (inches)' },
   { id: 'weight_lbs', label: 'Weight (lbs)' },
+  { id: 'avg_salary', label: 'AVG. Salaries' },
 ];
 
 const PlayerView = () => {
@@ -169,6 +170,15 @@ const PlayerView = () => {
                       <TableCell className="PlayerView__tableCell">{player.school}</TableCell>
                       <TableCell className="PlayerView__tableCell">{player.height_inch}</TableCell>
                       <TableCell className="PlayerView__tableCell">{player.weight_lbs}</TableCell>
+                      { player.avg_salary !== 0 ? (
+                      <TableCell className="PlayerView__tableCell">${(player.avg_salary / 1000000).toLocaleString(undefined, {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1,
+                      })}m</TableCell>
+                      ) : (
+                        <TableCell className="PlayerView__tableCell">Unknown</TableCell>
+                      )
+                      }
                     </TableRow>
                   ))
                 ) : (

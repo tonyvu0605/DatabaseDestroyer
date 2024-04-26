@@ -51,10 +51,10 @@ const PlayerProfileView = () => {
             </Typography>
             <Typography variant="h6" className="PlayerProfileView__cardMedia__infoText">
               <Iconify icon="solar:money-bag-outline" />
-              &nbsp;Avg Salary: ${(playerSalaryInfo[0]?.average_salary / 1000000).toLocaleString(undefined, {
+              &nbsp;Avg Salary: {playerSalaryInfo[0]?.average_salary ? `$${(playerSalaryInfo[0].average_salary / 1000000).toLocaleString(undefined, {
               minimumFractionDigits: 1,
               maximumFractionDigits: 1,
-            })}m
+            })}m` : 'Unknown'}
             </Typography>
             <Typography variant="h6" className="PlayerProfileView__cardMedia__infoText">
               <Iconify icon="mingcute:cake-line" />
@@ -84,11 +84,11 @@ const PlayerProfileView = () => {
           <Box className="PlayerProfileView__cardMedia__container">
             <img
               src={`https://cdn.nba.com/logos/nba/${playerData.team_id}/primary/L/logo.svg`}
-              alt="Player"
+              alt="Team Logo"
               className="PlayerProfileView__cardMedia__teamLogo"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = null;
+                e.target.style.display = 'none';
               }}
             />
             <Typography variant="h4" className="PlayerProfileView__playerTeam">
