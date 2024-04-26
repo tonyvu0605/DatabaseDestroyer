@@ -78,7 +78,7 @@ const PlayerSalariesView = () => {
         acc[player.player_id].push(player);
         return acc;
       }, {}),
-    [players]
+    [players],
   );
 
   function stringToColor(string) {
@@ -154,35 +154,41 @@ const PlayerSalariesView = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {Object.entries(groupPlayersByPlayerId).map(([playerId, playerData]) => {
-                  const playerName = playerData[0].player_name;
-                  return (
-                    <React.Fragment key={playerId}>
-                      <TableRow>
-                        <TableCell colSpan={3} className="PlayerSalariesView__tableCell" sx={{paddingBottom: 0}}>
-                          <div className="PlayerSalariesView__playerInfo">
-                            <Avatar
-                              src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
-                              alt={playerName}
-                              className="PlayerSalariesView__tableCell__avatar"
-                              loading="lazy"
-                            >
-                              <Avatar {...stringAvatar(`${playerName}`)} />
-                            </Avatar>
-                            <span className="PlayerSalariesView__playerName">{playerName}</span>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                      {playerData.map((data) => (
-                        <TableRow key={`${playerId}-${data.year}`}>
-                          <TableCell className="PlayerSalariesView__tableCell" />
-                          <TableCell className="PlayerSalariesView__tableCell">{data.salary}</TableCell>
-                          <TableCell className="PlayerSalariesView__tableCell">{data.year}</TableCell>
-                        </TableRow>
-                      ))}
-                    </React.Fragment>
-                  );
-                })}
+                {players?.length > 0 ? (
+                    Object.entries(groupPlayersByPlayerId).map(([playerId, playerData]) => {
+                      const playerName = playerData[0].player_name;
+                      return (
+                        <React.Fragment key={playerId}>
+                          <TableRow>
+                            <TableCell colSpan={3} className="PlayerSalariesView__tableCell" sx={{ paddingBottom: 0 }}>
+                              <div className="PlayerSalariesView__playerInfo">
+                                <Avatar
+                                  src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
+                                  alt={playerName}
+                                  className="PlayerSalariesView__tableCell__avatar"
+                                  loading="lazy"
+                                >
+                                  <Avatar {...stringAvatar(`${playerName}`)} />
+                                </Avatar>
+                                <span className="PlayerSalariesView__playerName">{playerName}</span>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                          {playerData.map((data) => (
+                            <TableRow key={`${playerId}-${data.year}`}>
+                              <TableCell className="PlayerSalariesView__tableCell" />
+                              <TableCell className="PlayerSalariesView__tableCell">{data.salary}</TableCell>
+                              <TableCell className="PlayerSalariesView__tableCell">{data.year}</TableCell>
+                            </TableRow>
+                          ))}
+                        </React.Fragment>
+                      );
+                    }))
+                  : (
+                    <TableRow>
+                      <TableCell colSpan={5}>Player not found</TableCell>
+                    </TableRow>
+                  )}
               </TableBody>
             </Table>
             <TablePagination
