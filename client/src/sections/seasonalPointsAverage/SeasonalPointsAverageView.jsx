@@ -16,7 +16,7 @@ import {
   TextField,
   Container,
   TableContainer,
-  TableSortLabel,
+  TableSortLabel, Typography,
 } from '@mui/material';
 
 import "./seasonalPointsAverageView.scss"
@@ -57,6 +57,7 @@ const SeasonalPointsAverageView = () => {
     <div className="SeasonalPointsAverageView">
       <Container maxWidth="lg">
         <Card className="SeasonalPointsAverageView__card">
+          <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Historical Point Avgs.</Typography>
           <div className="SeasonalPointsAverageView__searchItems">
             <TextField
                 label="Search Season"

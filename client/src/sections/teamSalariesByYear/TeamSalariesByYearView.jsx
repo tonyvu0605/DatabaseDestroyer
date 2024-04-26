@@ -18,7 +18,7 @@ import {
   Container,
   TableContainer,
   TableSortLabel,
-  TablePagination,
+  TablePagination, Typography,
 } from '@mui/material';
 
 import './teamSalariesByYearView.scss';
@@ -67,12 +67,12 @@ const TeamSalariesByYearView = () => {
     setOffset(0);
   };
 
-  console.log(teamSalaries);
 
   return (
     <div className="TeamSalariesByYearView">
       <Container maxWidth="lg">
         <Card className="TeamSalariesByYearView__card">
+          <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Team Salary Lookup</Typography>
           <div className="TeamView__searchItems">
             <TextField
               label="Search Teams"

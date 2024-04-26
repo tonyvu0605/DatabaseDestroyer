@@ -18,7 +18,7 @@ import {
   Container,
   TableContainer,
   TableSortLabel,
-  TablePagination,
+  TablePagination, Typography,
 } from '@mui/material';
 
 import './teamView.scss';
@@ -76,6 +76,7 @@ const TeamView = () => {
     <div className="TeamView">
       <Container maxWidth="lg">
         <Card className="TeamView__card">
+          <Typography className="TeamView__title"  variant="h4">Team Lookup</Typography>
           <div className="TeamView__searchItems">
             <TextField
               label="Search Teams"

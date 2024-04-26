@@ -18,7 +18,7 @@ import {
   Container,
   TableContainer,
   TableSortLabel,
-  TablePagination,
+  TablePagination, Typography,
 } from '@mui/material';
 
 import './playerSalariesView.scss';
@@ -114,6 +114,7 @@ const PlayerSalariesView = () => {
     <div className="PlayerSalariesView">
       <Container maxWidth="lg">
         <Card className="PlayerSalariesView__card">
+          <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Player Salary History</Typography>
           <div className="PlayerSalariesView__searchItems">
             <TextField
               label="Search Player"
