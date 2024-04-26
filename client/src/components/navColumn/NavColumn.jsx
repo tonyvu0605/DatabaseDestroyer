@@ -20,11 +20,6 @@ const NavColumn = () => {
       icon: <Iconify icon="game-icons:basketball-basket" />,
     },
     {
-      path: '/topPlayerSalaries',
-      label: 'Top Player Salaries',
-      icon: <Iconify icon="tabler:moneybag" />,
-    },
-    {
       path: '/teamSalaries',
       label: 'Team Salaries By Year',
       icon: <Iconify icon="fluent:people-money-24-regular" />,

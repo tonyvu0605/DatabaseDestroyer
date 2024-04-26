@@ -15,8 +15,8 @@ export const fetchHighScoreGame = async () => {
 export const fetchSeasonalPointsAverage = async ({ searchQuery, orderBy, order }) => {
   const getLikesSQL = `SELECT season, AVG(pts_home) as home_team_average, AVG(pts_away) as away_team_average, AVG(pts_home + pts_away) as total_points_average
                        FROM Games
-                       GROUP BY season
                        WHERE season LIKE ?
+                       GROUP BY season
                        ORDER BY ${orderBy} ${order}
     `;
 
