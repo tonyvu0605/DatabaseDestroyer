@@ -9,9 +9,14 @@ export const fetchTeamById = async (team_id) => {
 };
 
 export const fetchTeams = async ({ searchQuery, limit, offset, orderBy, order }) => {
+  
+
   const getTeamsSQL = `
-      SELECT *
+      SELECT team_city, team_name, team_year_founded, state_province, country, arena_name, team_headcoach, team_owner
       FROM Teams
+      INNER JOIN Arena ON Teams.team_id = Arena.arena_id
+      INNER JOIN Teams_Headcoaches ON Teams.team_id =  Teams_Headcoaches.team_id
+      INNER JOIN Teams_Owners ON Teams.team_id =  Teams_Owners.team_id
       WHERE team_name LIKE ?
       ORDER BY ${orderBy} ${order}
       LIMIT ?
