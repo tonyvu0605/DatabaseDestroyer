@@ -12,9 +12,15 @@ export const fetchPlayerById = async (player_id) => {
 
 export const fetchPlayers = async ({ searchQuery, limit, offset, orderBy, order }) => {
   const getPlayersSQL = `
-      SELECT *
-      FROM Players
-      WHERE player_name LIKE ?
+      WITH AvgSalaries AS (
+          SELECT player_id, AVG(salary) AS avg_salary
+          FROM Player_Salaries
+          GROUP BY player_id
+      )
+      SELECT p.*, COALESCE(CAST(avg.avg_salary AS SIGNED), 0) AS avg_salary
+      FROM Players p
+      LEFT JOIN AvgSalaries avg ON p.player_id = avg.player_id
+      WHERE p.player_name LIKE ?
       ORDER BY ${orderBy} ${order}
       LIMIT ?
           OFFSET ?;
