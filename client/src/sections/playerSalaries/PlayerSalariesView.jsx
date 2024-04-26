@@ -1,4 +1,5 @@
 import { debounce } from 'lodash';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPlayerSalariesByYear } from 'reduxes/PlayerSalariesSlice';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
@@ -23,7 +24,6 @@ import {
 } from '@mui/material';
 
 import './playerSalariesView.scss';
-import { useNavigate } from 'react-router-dom';
 
 const headCells = [
   { id: 'player_name', label: 'Player Name', sortable: true },
