@@ -2,22 +2,35 @@
 
 .SeasonalPointsAverageView {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
-
-  &__card {
-    padding-top: 1rem;
-    margin: 1rem;
+  padding: 30px;
+  h1 {
+    color: #371e06;
+    margin-bottom: 20px;
   }
-
-  &__searchItems {
-    margin-left: 1rem;
-
-    &__searchInput {
-      width: 40%;
+  table {
+    width: 70%;
+    border-collapse: collapse;
+    th,
+    td {
+      border: 1px solid #a69e9e;
+      padding: 8px 16px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+      color: #0f0e0e;
+      font-weight: bold;
+    }
+    tr:nth-child(odd) td {
+      background-color: #e9e7e7;
+    }
+    tr:hover {
+      background-color: #c0b7b7;
+      cursor: pointer;
     }
   }
 }

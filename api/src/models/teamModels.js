@@ -9,18 +9,17 @@ export const fetchTeamById = async (team_id) => {
 };
 
 export const fetchTeams = async ({ searchQuery, limit, offset, orderBy, order }) => {
-  
+
 
   const getTeamsSQL = `
-      SELECT team_city, team_name, team_year_founded, state_province, country, arena_name, team_headcoach, team_owner
+      SELECT Teams.team_id AS team_id, team_city, team_name, team_year_founded, state_province, country, arena_name, team_headcoach, team_owner
       FROM Teams
       INNER JOIN Arena ON Teams.team_id = Arena.arena_id
       INNER JOIN Teams_Headcoaches ON Teams.team_id =  Teams_Headcoaches.team_id
       INNER JOIN Teams_Owners ON Teams.team_id =  Teams_Owners.team_id
-      WHERE team_name LIKE ?
       ORDER BY ${orderBy} ${order}
-      LIMIT ?
-          OFFSET ?;
+      LIMIT ${limit}
+      OFFSET ${offset};
   `;
 
   const getCountSQL = `
@@ -50,7 +49,7 @@ export const fetch10Teams = async () => {
   return executeQuery(getLikesSQL, []);
 };
 
-export const fetchTeamSalariesByYear = async (year) => {
+export const fetchTeamSalariesByYear = async () => {
   const getLikesSQL = `WITH cte1 as
             (SELECT Teams.team_name as team_name, Players_Teams.team_id as team_id,
                     Players_Teams.player_id as player_id, Player_Salaries.year as year,
@@ -60,11 +59,10 @@ export const fetchTeamSalariesByYear = async (year) => {
              INNER JOIN Player_Salaries ON Players_Teams.player_id = Player_Salaries.player_id)
         SELECT team_name, year, sum(salary) as total_salary
         FROM cte1
-        WHERE year = ?
         GROUP BY team_name, year
         ORDER BY total_salary DESC;`;
 
-  return executeQuery(getLikesSQL, [year]);
+  return executeQuery(getLikesSQL, []);
 };
 
 export const fetchTeamPerformance = async ({ searchQuery, orderBy, order }) => {

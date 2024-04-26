@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSeasonalPointsAverage } from 'reduxes/seasonalPointsAverageSlice';
 
+import "./seasonalPointsAverageView.scss"
+
 const SeasonalPointsAverageView = () => {
   const dispatch = useDispatch();
   const { data: seasonalPointsAverage } = useSelector((state) => state.seasonalPointsAverage);
@@ -13,7 +15,7 @@ const SeasonalPointsAverageView = () => {
   const headers = seasonalPointsAverage.length > 0 ? Object.keys(seasonalPointsAverage[0]) : [];
 
   return (
-    <div>
+    <div className="SeasonalPointsAverageView">
       <h1>Seasonal Points Average</h1>
       <table>
         <thead>

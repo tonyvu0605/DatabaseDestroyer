@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHighScoringGame } from 'reduxes/highScoringGameSlice';
 
-const SeasonalPointsAverageView = () => {
+import "./highScoringGameView.scss"
+
+const HighScoringGameView = () => {
   const dispatch = useDispatch();
   const { data: highScoringGames } = useSelector((state) => state.highScoringGame);
 
@@ -13,12 +15,12 @@ const SeasonalPointsAverageView = () => {
   const headers = highScoringGames.length > 0 ? Object.keys(highScoringGames[0]) : [];
 
   return (
-    <div>
+    <div className="HighScoringGameView">
       <h1>High Scoring Game</h1>
       <table>
         <thead>
           <tr>
-            {headers.map((header) => (
+            {headers.map(header => (
               <th key={header}>{header}</th>
             ))}
           </tr>
@@ -26,7 +28,7 @@ const SeasonalPointsAverageView = () => {
         <tbody>
           {highScoringGames.map((game, index) => (
             <tr key={index}>
-              {headers.map((header) => (
+              {headers.map(header => (
                 <td key={`${header}-${index}`}>{game[header]}</td>
               ))}
             </tr>
@@ -37,4 +39,4 @@ const SeasonalPointsAverageView = () => {
   );
 };
 
-export default SeasonalPointsAverageView;
+export default HighScoringGameView;
