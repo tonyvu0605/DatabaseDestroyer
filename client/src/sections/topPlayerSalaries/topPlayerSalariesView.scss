@@ -7,30 +7,30 @@
   justify-content: center;
   width: 100%;
   padding: 30px;
-
-  &__tableCell {
-    display: flex;
-    align-items: start;
-    flex-direction: row;
-
-    &__avatar {
-      width: 2rem !important;
-      height: 2rem !important;
-      margin-right: 0.5rem;
+  h1 {
+    color: #371e06;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 70%;
+    border-collapse: collapse;
+    th,
+    td {
+      border: 1px solid #a69e9e;
+      padding: 8px 16px;
+      text-align: left;
     }
-  }
-
-  &__card {
-    padding-top: 1rem;
-    margin: 1rem;
-    overflow-y: hidden;
-  }
-
-  &__searchItems {
-    margin-left: 1rem;
-
-    &__searchInput {
-      width: 40%;
+    th {
+      background-color: #f4f4f4;
+      color: #0f0e0e;
+      font-weight: bold;
+    }
+    tr:nth-child(odd) td {
+      background-color: #e9e7e7;
+    }
+    tr:hover {
+      background-color: #c0b7b7;
+      cursor: pointer;
     }
   }
 }

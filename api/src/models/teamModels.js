@@ -17,6 +17,7 @@ export const fetchTeams = async ({ searchQuery, limit, offset, orderBy, order })
       INNER JOIN Arena ON Teams.team_id = Arena.arena_id
       INNER JOIN Teams_Headcoaches ON Teams.team_id =  Teams_Headcoaches.team_id
       INNER JOIN Teams_Owners ON Teams.team_id =  Teams_Owners.team_id
+      WHERE team_name LIKE ?
       ORDER BY ${orderBy} ${order}
       LIMIT ${limit}
       OFFSET ${offset};

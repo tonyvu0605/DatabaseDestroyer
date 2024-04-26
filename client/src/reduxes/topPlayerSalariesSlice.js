@@ -6,7 +6,7 @@ export const fetchTopPlayerSalaries = createAsyncThunk(
   'topPlayerSalaries/fetchTopPlayerSalaries',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await makeRequest.get('/player/top-salaries');
+      const response = await makeRequest.get('/player/top_salaries');
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');

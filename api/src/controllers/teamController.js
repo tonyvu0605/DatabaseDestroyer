@@ -27,7 +27,7 @@ export const searchTeams = async (req, res, next) => {
     orderBy = orderBy ? `${orderBy.trim()}` : 'team_name';
     order = order ? `${order.trim()}` : 'ASC';
 
-    const teamData = await fetchTeams({ searchQuery, limit, offset, orderBy, order,  });
+    const teamData = await fetchTeams({ searchQuery, limit, offset, orderBy, order });
 
     return res.status(200).json(teamData);
   } catch (err) {

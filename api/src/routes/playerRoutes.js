@@ -16,7 +16,7 @@ const router = express.Router();
 router.get('/profile/:player_id', verifyToken, getPlayerById);
 router.get('/random', get10Players);
 router.get('/search', searchPlayers);
-router.get('/top-salaries', getTopPlayerSalaries);
+router.get('/top_salaries', getTopPlayerSalaries);
 router.get('/average_salaries', getAveragePlayerSalariesByYear);
 router.get('/player_salaries', getPlayerSalariesInfo);
 

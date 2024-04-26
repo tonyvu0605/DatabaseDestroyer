@@ -10,7 +10,7 @@ export default function TopPlayerSalariesPage() {
       <Helmet>
         <title>Top Player Salaries</title>
       </Helmet>
-      <TopPlayerSalariesView />
+        <TopPlayerSalariesView/>
     </>
   );
 }
