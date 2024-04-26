@@ -12,10 +12,12 @@ const DefaultLayout = ({ children }) => (
     <NavBar />
 
     <div className="defaultLayout__content">
-      <div className='defaultLayout__content__navColumn'>
-        <NavColumn />
+      <div className="defaultLayout__content__navColumn">
+      <NavColumn />
       </div>
+      <div className="defaultLayout__content__mainContent">
       {children}
+      </div>
     </div>
   </div>
 );

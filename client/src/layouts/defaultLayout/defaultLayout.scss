@@ -14,9 +14,17 @@
     display: flex;
 
     &__navColumn{
-      position: sticky;
-      top: 9%;
+      width: 20vw;
+      position: fixed;
       height: 100vh;
+    }
+
+    &__mainContent{
+      width: 80vw;
+      flex: 1;
+      padding-left: 15vw;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

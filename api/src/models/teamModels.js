@@ -25,7 +25,7 @@ export const fetchTeams = async ({ searchQuery, limit, offset, orderBy, order })
   `;
 
   const [teams, countResult] = await Promise.all([
-    executeQuery(getTeamsSQL, [searchQuery, orderBy, order, limit, offset]),
+    executeQuery(getTeamsSQL, [searchQuery, limit, offset]),
     executeQuery(getCountSQL, [searchQuery]),
   ]);
 

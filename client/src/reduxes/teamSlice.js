@@ -12,7 +12,6 @@ export const fetchTeams = createAsyncThunk(
 
       return response.data;
     } catch (err) {
-      console.log(err);
       return rejectWithValue(err.response ? err.response.data : 'An error occurred');
     }
   }
@@ -59,7 +58,7 @@ const teamSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchTeams.fulfilled, (state, action) => {
-        state.teamData = action.payload.team;
+        state.teamData = action.payload.teams;
         state.totalCount = action.payload.totalCount;
         state.loading = false;
       })
