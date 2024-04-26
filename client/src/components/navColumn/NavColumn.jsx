@@ -25,7 +25,7 @@ const NavColumn = () => {
       icon: <Iconify icon="fluent:people-money-24-regular" />,
     },
     {
-      path: '/PlayerSalaries',
+      path: '/playerSalaries',
       label: 'Player Salaries By Year',
       icon: <Iconify icon="fluent:receipt-money-24-regular" />,
     },

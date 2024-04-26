@@ -16,9 +16,9 @@ import {
   TableHead,
   TextField,
   Container,
+  Typography,
   TableContainer,
-  TableSortLabel,
-  TablePagination, Typography,
+  TableSortLabel, TablePagination,
 } from '@mui/material';
 
 import './teamSalariesByYearView.scss';

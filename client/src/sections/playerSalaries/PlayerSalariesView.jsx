@@ -16,12 +16,14 @@ import {
   TableHead,
   TextField,
   Container,
+  Typography,
   TableContainer,
   TableSortLabel,
-  TablePagination, Typography,
+  TablePagination,
 } from '@mui/material';
 
 import './playerSalariesView.scss';
+import { useNavigate } from 'react-router-dom';
 
 const headCells = [
   { id: 'player_name', label: 'Player Name', sortable: true },
@@ -32,6 +34,7 @@ const headCells = [
 const PlayerSalariesView = () => {
   const dispatch = useDispatch();
   const { data: players, totalCount } = useSelector((state) => state.playerSalaries);
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [limit, setLimit] = useState(2);
   const [offset, setOffset] = useState(0);
@@ -81,12 +84,12 @@ const PlayerSalariesView = () => {
     [players],
   );
 
-  function stringToColor(string) {
+  function stringToColor({string}) {
     let hash = 0;
     let i;
 
     /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
+    for (i = 0; i < string?.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
 
@@ -102,19 +105,39 @@ const PlayerSalariesView = () => {
   }
 
   function stringAvatar(name) {
+    if (!name) {
+      return {
+        sx: {
+          bgcolor: 'grey',
+        },
+        children: 'N/A',
+      };
+    }
+
+    const nameParts = name.split(' ');
+    const initials = nameParts.length > 1
+      ? `${nameParts[0][0]}${nameParts[1][0]}`
+      : nameParts[0][0];
+
     return {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+      children: initials,
     };
+  }
+
+  if(!players){
+    return null;
   }
 
   return (
     <div className="PlayerSalariesView">
       <Container maxWidth="lg">
         <Card className="PlayerSalariesView__card">
-          <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Player Salary History</Typography>
+          <Typography sx={{ paddingLeft: '1rem' }} className="TeamSalariesByYearView_title" variant="h4">
+            Player Salary History
+          </Typography>
           <div className="PlayerSalariesView__searchItems">
             <TextField
               label="Search Player"
@@ -155,41 +178,41 @@ const PlayerSalariesView = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {players?.length > 0 ? (
-                    Object.entries(groupPlayersByPlayerId).map(([playerId, playerData]) => {
-                      const playerName = playerData[0].player_name;
-                      return (
-                        <React.Fragment key={playerId}>
-                          <TableRow>
-                            <TableCell colSpan={3} className="PlayerSalariesView__tableCell" sx={{ paddingBottom: 0 }}>
-                              <div className="PlayerSalariesView__playerInfo">
-                                <Avatar
-                                  src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
-                                  alt={playerName}
-                                  className="PlayerSalariesView__tableCell__avatar"
-                                  loading="lazy"
-                                >
-                                  <Avatar {...stringAvatar(`${playerName}`)} />
-                                </Avatar>
-                                <span className="PlayerSalariesView__playerName">{playerName}</span>
-                              </div>
-                            </TableCell>
+                {players?.length > 0 && !!players ? (
+                  Object.entries(groupPlayersByPlayerId).map(([playerId, playerData]) => {
+                    const playerName = playerData[0]?.player_name;
+                    return (
+                      <React.Fragment key={playerId}>
+                        <TableRow onClick={() => navigate(`/player/${playerId}`)} sx={{ cursor: 'pointer' }}>
+                          <TableCell colSpan={3} className="PlayerSalariesView__tableCell" sx={{ paddingBottom: 0 }}>
+                            <div className="PlayerSalariesView__playerInfo">
+                              <Avatar
+                                src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png`}
+                                alt={playerName}
+                                className="PlayerSalariesView__tableCell__avatar"
+                                loading="lazy"
+                              >
+                                <Avatar {...stringAvatar(`${playerName}`)} />
+                              </Avatar>
+                              <span className="PlayerSalariesView__playerName">{playerName}</span>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                        {playerData.map((data) => (
+                          <TableRow key={`${playerId}-${data.year}`}>
+                            <TableCell className="PlayerSalariesView__tableCell" />
+                            <TableCell className="PlayerSalariesView__tableCell">{data.salary}</TableCell>
+                            <TableCell className="PlayerSalariesView__tableCell">{data.year}</TableCell>
                           </TableRow>
-                          {playerData.map((data) => (
-                            <TableRow key={`${playerId}-${data.year}`}>
-                              <TableCell className="PlayerSalariesView__tableCell" />
-                              <TableCell className="PlayerSalariesView__tableCell">{data.salary}</TableCell>
-                              <TableCell className="PlayerSalariesView__tableCell">{data.year}</TableCell>
-                            </TableRow>
-                          ))}
-                        </React.Fragment>
-                      );
-                    }))
-                  : (
-                    <TableRow>
-                      <TableCell colSpan={5}>Player not found</TableCell>
-                    </TableRow>
-                  )}
+                        ))}
+                      </React.Fragment>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={5}>Player not found</TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
             <TablePagination

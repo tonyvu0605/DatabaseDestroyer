@@ -16,8 +16,8 @@ import {
   TableHead,
   TextField,
   Container,
-  TableContainer,
-  TableSortLabel, TablePagination, Typography,
+  Typography,
+  TableContainer, TableSortLabel, TablePagination,
 } from '@mui/material';
 
 import './teamPerformanceView.scss';
