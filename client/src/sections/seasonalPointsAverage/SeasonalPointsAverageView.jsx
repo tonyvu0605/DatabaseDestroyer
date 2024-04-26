@@ -16,7 +16,7 @@ import {
   TextField,
   Container,
   Typography,
-  TableContainer, TableSortLabel,
+  TableContainer, TableSortLabel, CardMedia,
 } from '@mui/material';
 
 import "./seasonalPointsAverageView.scss"
@@ -57,6 +57,7 @@ const SeasonalPointsAverageView = () => {
     <div className="SeasonalPointsAverageView">
       <Container maxWidth="lg">
         <Card className="SeasonalPointsAverageView__card">
+          <CardMedia className="PlayerView__cardMedia" image='/assets/seasonalPtsHeroComp.png' />
           <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Historical Point Avgs.</Typography>
           <div className="SeasonalPointsAverageView__searchItems">
             <TextField

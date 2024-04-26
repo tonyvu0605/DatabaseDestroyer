@@ -11,7 +11,7 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  Container, Typography, TableContainer,
+  Container, Typography, TableContainer, CardMedia,
 } from '@mui/material';
 
 import './highScoringGameView.scss';
@@ -36,6 +36,7 @@ const HighScoringGameView = () => {
     <div className="HighScoringGameView">
       <Container maxWidth="lg">
         <Card className="HighScoringGameView__card">
+          <CardMedia className="PlayerView__cardMedia" image='/assets/gameHeroComp.png' />
           <Typography className="HighScoringGameView__title"  variant="h4">High Scoring Game</Typography>
           <TableContainer component={Paper}>
             <Table>

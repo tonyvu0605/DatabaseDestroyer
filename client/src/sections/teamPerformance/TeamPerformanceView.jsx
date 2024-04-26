@@ -17,7 +17,7 @@ import {
   TextField,
   Container,
   Typography,
-  TableContainer, TableSortLabel, TablePagination,
+  TableContainer, TableSortLabel, TablePagination, CardMedia,
 } from '@mui/material';
 
 import './teamPerformanceView.scss';
@@ -71,6 +71,7 @@ const TeamPerformanceView = () => {
     <div className="TeamPerformanceView">
       <Container maxWidth="lg">
         <Card className="TeamPerformanceView__card">
+          <CardMedia className="PlayerView__cardMedia" image='/assets/teamPerformanceHeroComp.png' />
           <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Historical Team Performances</Typography>
           <div className="TeamPerformanceView__searchItems">
             <TextField

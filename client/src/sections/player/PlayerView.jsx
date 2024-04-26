@@ -19,7 +19,7 @@ import {
   Container,
   Typography,
   TableContainer,
-  TableSortLabel, TablePagination,
+  TableSortLabel, TablePagination, CardMedia,
 } from '@mui/material';
 
 import './playerView.scss';
@@ -105,6 +105,7 @@ const PlayerView = () => {
     <div className="PlayerView">
       <Container maxWidth="lg">
         <Card className="PlayerView__card">
+          <CardMedia className="PlayerView__cardMedia" image='/assets/playerHeroComp.png' />
           <Typography className="PlayerView__title"  variant="h4">Player Lookup</Typography>
           <div className="PlayerView__searchItems">
             <TextField

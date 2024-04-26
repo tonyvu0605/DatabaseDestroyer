@@ -20,7 +20,7 @@ import {
   Typography,
   TableContainer,
   TableSortLabel,
-  TablePagination,
+  TablePagination, CardMedia,
 } from '@mui/material';
 
 import './playerSalariesView.scss';
@@ -135,6 +135,7 @@ const PlayerSalariesView = () => {
     <div className="PlayerSalariesView">
       <Container maxWidth="lg">
         <Card className="PlayerSalariesView__card">
+          <CardMedia className="PlayerView__cardMedia" image='/assets/playerSalariesHeroComp.jpg' />
           <Typography sx={{ paddingLeft: '1rem' }} className="TeamSalariesByYearView_title" variant="h4">
             Player Salary History
           </Typography>
