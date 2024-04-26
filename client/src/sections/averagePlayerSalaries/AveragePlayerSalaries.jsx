@@ -4,7 +4,6 @@ import { fetchAveragePlayerSalaries } from 'reduxes/averagePlayerSalariesSlice';
 
 import './averagePlayerSalaries.scss';
 
-
 const AveragePlayerSalariesView = () => {
   const dispatch = useDispatch();
   const { data: players } = useSelector(state => state.averagePlayerSalaries);

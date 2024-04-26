@@ -13,11 +13,10 @@ export const fetchHighScoreGame = async () => {
 };
 
 export const fetchSeasonalPointsAverage = async () => {
-  const getLikesSQL = `SELECT P.player_id AS player_id, player_name, SUM(salary) as total_salary
-                         FROM Player_Salaries
-                         JOIN Players P on P.player_id = Player_Salaries.player_id
-                         GROUP BY player_name, P.player_id
-                         ORDER BY total_salary DESC;
+  const getLikesSQL = `SELECT season, AVG(pts_home) as home_team_average, AVG(pts_away) as away_team_average, AVG(pts_home + pts_away) as total_points_average
+                       FROM Games
+                       GROUP BY season
+                       ORDER BY season ASC;
     `;
 
   return executeQuery(getLikesSQL, []);
