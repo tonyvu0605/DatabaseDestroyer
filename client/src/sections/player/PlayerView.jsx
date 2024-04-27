@@ -17,9 +17,11 @@ import {
   TableHead,
   TextField,
   Container,
+  CardMedia,
   Typography,
   TableContainer,
-  TableSortLabel, TablePagination, CardMedia,
+  TableSortLabel,
+  TablePagination,
 } from '@mui/material';
 
 import './playerView.scss';

@@ -4,7 +4,6 @@ import NullUserLayout from 'layouts/nullUserLayout';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import ProtectedRoute from './ProtectedRoute';
-import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 

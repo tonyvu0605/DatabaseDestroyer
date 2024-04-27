@@ -11,7 +11,10 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  Container, Typography, TableContainer, CardMedia,
+  Container,
+  CardMedia,
+  Typography,
+  TableContainer,
 } from '@mui/material';
 
 import './highScoringGameView.scss';

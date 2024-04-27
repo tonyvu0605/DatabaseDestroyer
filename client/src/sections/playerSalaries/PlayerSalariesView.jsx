@@ -17,10 +17,11 @@ import {
   TableHead,
   TextField,
   Container,
+  CardMedia,
   Typography,
   TableContainer,
   TableSortLabel,
-  TablePagination, CardMedia,
+  TablePagination,
 } from '@mui/material';
 
 import './playerSalariesView.scss';

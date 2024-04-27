@@ -15,8 +15,10 @@ import {
   TableHead,
   TextField,
   Container,
+  CardMedia,
   Typography,
-  TableContainer, TableSortLabel, CardMedia,
+  TableContainer,
+  TableSortLabel,
 } from '@mui/material';
 
 import "./seasonalPointsAverageView.scss"

@@ -16,8 +16,11 @@ import {
   TableHead,
   TextField,
   Container,
+  CardMedia,
   Typography,
-  TableContainer, TableSortLabel, TablePagination, CardMedia,
+  TableContainer,
+  TableSortLabel,
+  TablePagination
 } from '@mui/material';
 
 import './teamPerformanceView.scss';
