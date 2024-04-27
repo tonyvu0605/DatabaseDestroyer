@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import { useSelector } from 'react-redux';
 import DefaultLayout from 'layouts/defaultLayout';
 import NullUserLayout from 'layouts/nullUserLayout';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
@@ -22,6 +23,7 @@ export const HighScoringGamePage = lazy(() => import('pages/highScoringGame'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
   return useRoutes([
     {
@@ -46,7 +48,9 @@ export default function Router() {
       ],
     },
     {
-      element: (
+      element: currentUser ? (
+        <Navigate to="/" />
+      ) : (
         <NullUserLayout>
           <Outlet />
         </NullUserLayout>

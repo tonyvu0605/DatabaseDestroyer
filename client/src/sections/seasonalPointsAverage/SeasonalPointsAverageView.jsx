@@ -60,7 +60,7 @@ const SeasonalPointsAverageView = () => {
       <Container maxWidth="lg">
         <Card className="SeasonalPointsAverageView__card">
           <CardMedia className="PlayerView__cardMedia" image='/assets/seasonalPtsHeroComp.png' />
-          <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Historical Point Avgs.</Typography>
+          <Typography sx={{paddingLeft: '1rem'}} className="TeamSalariesByYearView_title" variant="h4">Seasonal Point Avgs.</Typography>
           <div className="SeasonalPointsAverageView__searchItems">
             <TextField
                 label="Search Season"
